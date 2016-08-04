@@ -12,10 +12,13 @@ namespace PrograAvanzada.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AdministrarUsuarios
+    public partial class AspNetUserRoles
     {
-        public int id { get; set; }
-        public string email { get; set; }
-        public string rol { get; set; }
+        public int Id_UR { get; set; }
+        public string UserId { get; set; }
+        public string RoleId { get; set; }
+    
+        public virtual AspNetRoles AspNetRoles { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

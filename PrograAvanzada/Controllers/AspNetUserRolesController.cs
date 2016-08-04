@@ -10,108 +10,116 @@ using PrograAvanzada.Models;
 
 namespace PrograAvanzada.Controllers
 {
-    public class AdministrarUsuariosController : Controller
+    public class AspNetUserRolesController : Controller
     {
-        private db_admin_proyectosEntities db = new db_admin_proyectosEntities();
+        private db_admin_proyectosEntities1 db = new db_admin_proyectosEntities1();
 
-        // GET: AdministrarUsuarios
+        // GET: AspNetUserRoles
         public ActionResult Index()
         {
-            return View(db.AdministrarUsuarios.ToList());
+            var aspNetUserRoles = db.AspNetUserRoles.Include(a => a.AspNetRoles).Include(a => a.AspNetUsers);
+            return View(aspNetUserRoles.ToList());
         }
 
-        // GET: AdministrarUsuarios/Details/5
+        // GET: AspNetUserRoles/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdministrarUsuarios administrarUsuarios = db.AdministrarUsuarios.Find(id);
-            if (administrarUsuarios == null)
+            AspNetUserRoles aspNetUserRoles = db.AspNetUserRoles.Find(id);
+            if (aspNetUserRoles == null)
             {
                 return HttpNotFound();
             }
-            return View(administrarUsuarios);
+            return View(aspNetUserRoles);
         }
 
-        // GET: AdministrarUsuarios/Create
+        // GET: AspNetUserRoles/Create
         public ActionResult Create()
         {
+            ViewBag.RoleId = new SelectList(db.AspNetRoles, "Id", "Name");
+            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
-        // POST: AdministrarUsuarios/Create
+        // POST: AspNetUserRoles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,email,rol")] AdministrarUsuarios administrarUsuarios)
+        public ActionResult Create([Bind(Include = "Id_UR,UserId,RoleId")] AspNetUserRoles aspNetUserRoles)
         {
             if (ModelState.IsValid)
             {
-                db.AdministrarUsuarios.Add(administrarUsuarios);
+                db.AspNetUserRoles.Add(aspNetUserRoles);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(administrarUsuarios);
+            ViewBag.RoleId = new SelectList(db.AspNetRoles, "Id", "Name", aspNetUserRoles.RoleId);
+            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", aspNetUserRoles.UserId);
+            return View(aspNetUserRoles);
         }
 
-        // GET: AdministrarUsuarios/Edit/5
+        // GET: AspNetUserRoles/Edit/5
         public ActionResult Edit(int? id)
         {
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdministrarUsuarios administrarUsuarios = db.AdministrarUsuarios.Find(id);
-            if (administrarUsuarios == null)
+            AspNetUserRoles aspNetUserRoles = db.AspNetUserRoles.Find(id);
+            if (aspNetUserRoles == null)
             {
                 return HttpNotFound();
             }
-            return View(administrarUsuarios);
+            ViewBag.RoleId = new SelectList(db.AspNetRoles, "Id", "Name", aspNetUserRoles.RoleId);
+            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", aspNetUserRoles.UserId);
+            return View(aspNetUserRoles);
         }
 
-        // POST: AdministrarUsuarios/Edit/5
+        // POST: AspNetUserRoles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,email,rol")] AdministrarUsuarios administrarUsuarios)
+        public ActionResult Edit([Bind(Include = "Id_UR,UserId,RoleId")] AspNetUserRoles aspNetUserRoles)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(administrarUsuarios).State = EntityState.Modified;
+                db.Entry(aspNetUserRoles).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(administrarUsuarios);
+            ViewBag.RoleId = new SelectList(db.AspNetRoles, "Id", "Name", aspNetUserRoles.RoleId);
+            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", aspNetUserRoles.UserId);
+            return View(aspNetUserRoles);
         }
 
-        // GET: AdministrarUsuarios/Delete/5
+        // GET: AspNetUserRoles/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdministrarUsuarios administrarUsuarios = db.AdministrarUsuarios.Find(id);
-            if (administrarUsuarios == null)
+            AspNetUserRoles aspNetUserRoles = db.AspNetUserRoles.Find(id);
+            if (aspNetUserRoles == null)
             {
                 return HttpNotFound();
             }
-            return View(administrarUsuarios);
+            return View(aspNetUserRoles);
         }
 
-        // POST: AdministrarUsuarios/Delete/5
+        // POST: AspNetUserRoles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            AdministrarUsuarios administrarUsuarios = db.AdministrarUsuarios.Find(id);
-            db.AdministrarUsuarios.Remove(administrarUsuarios);
+            AspNetUserRoles aspNetUserRoles = db.AspNetUserRoles.Find(id);
+            db.AspNetUserRoles.Remove(aspNetUserRoles);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

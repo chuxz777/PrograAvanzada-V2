@@ -18,7 +18,7 @@ namespace PrograAvanzada.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private db_admin_proyectosEntities db = new db_admin_proyectosEntities();
+        private db_admin_proyectosEntities1 db = new db_admin_proyectosEntities1();
 
         public AccountController()
         {
@@ -160,8 +160,8 @@ namespace PrograAvanzada.Controllers
 
                 if (model.Email.Contains("@gmail.com"))
                 {
-                    db.sp_asignar_rol(user.Id, "5");
-                    db.SaveChanges();
+                //    db.sp_asignar_rol(user.Id, "5");
+                 //   db.SaveChanges();
 
                     if (result.Succeeded)
                     {

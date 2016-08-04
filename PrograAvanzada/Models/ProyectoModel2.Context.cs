@@ -15,10 +15,10 @@ namespace PrograAvanzada.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class db_admin_proyectosEntities : DbContext
+    public partial class db_admin_proyectosEntities1 : DbContext
     {
-        public db_admin_proyectosEntities()
-            : base("name=db_admin_proyectosEntities")
+        public db_admin_proyectosEntities1()
+            : base("name=db_admin_proyectosEntities1")
         {
         }
     
@@ -31,6 +31,7 @@ namespace PrograAvanzada.Models
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<comentario_por_tarea> comentario_por_tarea { get; set; }
         public virtual DbSet<comentarios_foro> comentarios_foro { get; set; }
@@ -40,7 +41,6 @@ namespace PrograAvanzada.Models
         public virtual DbSet<proyecto> proyecto { get; set; }
         public virtual DbSet<tarea> tarea { get; set; }
         public virtual DbSet<usuarios_por_proyecto> usuarios_por_proyecto { get; set; }
-        public virtual DbSet<AdministrarUsuarios> AdministrarUsuarios { get; set; }
     
         public virtual int sp_asignar_rol(string userId, string roleId)
         {

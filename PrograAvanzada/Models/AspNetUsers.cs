@@ -19,13 +19,13 @@ namespace PrograAvanzada.Models
         {
             this.AspNetUserClaims = new HashSet<AspNetUserClaims>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
+            this.AspNetUserRoles = new HashSet<AspNetUserRoles>();
             this.comentarios_foro = new HashSet<comentarios_foro>();
             this.comentario_por_tarea = new HashSet<comentario_por_tarea>();
             this.historico_tarea = new HashSet<historico_tarea>();
             this.proyecto = new HashSet<proyecto>();
             this.tarea = new HashSet<tarea>();
             this.usuarios_por_proyecto = new HashSet<usuarios_por_proyecto>();
-            this.AspNetRoles = new HashSet<AspNetRoles>();
         }
     
         public string Id { get; set; }
@@ -46,6 +46,8 @@ namespace PrograAvanzada.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<comentarios_foro> comentarios_foro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<comentario_por_tarea> comentario_por_tarea { get; set; }
@@ -57,7 +59,5 @@ namespace PrograAvanzada.Models
         public virtual ICollection<tarea> tarea { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<usuarios_por_proyecto> usuarios_por_proyecto { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
     }
 }

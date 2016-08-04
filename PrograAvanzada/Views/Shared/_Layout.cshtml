@@ -26,7 +26,12 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 
                     <li>@Html.ActionLink("Proyectos", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Usuarios", "Contact", "Home")</li>
+
+                    @if (User.IsInRole("Administrador de Proyectos"))
+                    {
+                       <li>@Html.ActionLink("Usuarios", "Index", "AspNetUserRoles")</li>
+                    }
+
                     <li>@Html.ActionLink("Tareas", "Contact", "Home")</li>
 
                 </ul>

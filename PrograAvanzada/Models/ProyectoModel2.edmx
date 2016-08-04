@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="db_admin_proyectosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="db_admin_proyectosModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -14,14 +14,6 @@
           <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="Model" Type="varbinary(max)" Nullable="false" />
           <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AdministrarUsuarios">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="email" Type="nvarchar" MaxLength="256" />
-          <Property Name="rol" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -51,9 +43,9 @@
         </EntityType>
         <EntityType Name="AspNetUserRoles">
           <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="Id_UR" />
           </Key>
+          <Property Name="Id_UR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
@@ -223,9 +215,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
           <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetRoles">
@@ -237,9 +227,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
@@ -382,9 +370,8 @@
           <Parameter Name="email" Type="nvarchar" Mode="In" />
           <Parameter Name="rol" Type="nvarchar" Mode="In" />
         </Function>
-        <EntityContainer Name="db_admin_proyectosModelStoreContainer">
+        <EntityContainer Name="db_admin_proyectosModel1StoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AdministrarUsuarios" EntityType="Self.AdministrarUsuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -474,7 +461,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="db_admin_proyectosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="db_admin_proyectosModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -491,7 +478,7 @@
           </Key>
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetRoles" ToRole="AspNetUserRoles" />
         </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
@@ -514,6 +501,16 @@
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
         </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="Id_UR" />
+          </Key>
+          <Property Name="Id_UR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetUserRoles" ToRole="AspNetRoles" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUserRoles" ToRole="AspNetUsers" />
+        </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
@@ -532,13 +529,13 @@
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserRoles" />
           <NavigationProperty Name="comentarios_foro" Relationship="Self.fk_comentarioForo_Usuario" FromRole="AspNetUsers" ToRole="comentarios_foro" />
           <NavigationProperty Name="comentario_por_tarea" Relationship="Self.fk_comentarioTarea_Usuario" FromRole="AspNetUsers" ToRole="comentario_por_tarea" />
           <NavigationProperty Name="historico_tarea" Relationship="Self.fk_historico_usuario" FromRole="AspNetUsers" ToRole="historico_tarea" />
           <NavigationProperty Name="proyecto" Relationship="Self.fk_proyecto_usuario" FromRole="AspNetUsers" ToRole="proyecto" />
           <NavigationProperty Name="tarea" Relationship="Self.fk_tarea_usuarioAsignado" FromRole="AspNetUsers" ToRole="tarea" />
           <NavigationProperty Name="usuarios_por_proyecto" Relationship="Self.fk_usuarioProyecto_usuario" FromRole="AspNetUsers" ToRole="usuarios_por_proyecto" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="comentario_por_tarea">
           <Key>
@@ -634,6 +631,18 @@
           <NavigationProperty Name="AspNetUsers" Relationship="Self.fk_usuarioProyecto_usuario" FromRole="usuarios_por_proyecto" ToRole="AspNetUsers" />
           <NavigationProperty Name="proyecto" Relationship="Self.fk_usuarioProyecto_Proyecto" FromRole="usuarios_por_proyecto" ToRole="proyecto" />
         </EntityType>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -658,6 +667,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -830,15 +851,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="db_admin_proyectosEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="db_admin_proyectosEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
           <EntitySet Name="comentario_por_tarea" EntityType="Self.comentario_por_tarea" />
           <EntitySet Name="comentarios_foro" EntityType="Self.comentarios_foro" />
@@ -848,6 +866,10 @@
           <EntitySet Name="proyecto" EntityType="Self.proyecto" />
           <EntitySet Name="tarea" EntityType="Self.tarea" />
           <EntitySet Name="usuarios_por_proyecto" EntityType="Self.usuarios_por_proyecto" />
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -855,6 +877,10 @@
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <AssociationSet Name="fk_comentarioForo_Usuario" Association="Self.fk_comentarioForo_Usuario">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -912,11 +938,6 @@
             <End Role="proyecto" EntitySet="proyecto" />
             <End Role="usuarios_por_proyecto" EntitySet="usuarios_por_proyecto" />
           </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <EntitySet Name="AdministrarUsuarios" EntityType="db_admin_proyectosModel.AdministrarUsuarios" />
           <FunctionImport Name="sp_asignar_rol">
             <Parameter Name="UserId" Mode="In" Type="String" />
             <Parameter Name="RoleId" Mode="In" Type="String" />
@@ -930,22 +951,14 @@
             <Parameter Name="rol" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
-        <EntityType Name="AdministrarUsuarios">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="rol" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="db_admin_proyectosModelStoreContainer" CdmEntityContainer="db_admin_proyectosEntities">
+        <EntityContainerMapping StorageEntityContainer="db_admin_proyectosModel1StoreContainer" CdmEntityContainer="db_admin_proyectosEntities1">
           <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="db_admin_proyectosModel.C__MigrationHistory">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel1.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
@@ -955,7 +968,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="db_admin_proyectosModel.AspNetRoles">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel1.AspNetRoles">
               <MappingFragment StoreEntitySet="AspNetRoles">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -963,7 +976,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="db_admin_proyectosModel.AspNetUserClaims">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel1.AspNetUserClaims">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -973,7 +986,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="db_admin_proyectosModel.AspNetUserLogins">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel1.AspNetUserLogins">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -981,8 +994,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserRoles">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel1.AspNetUserRoles">
+              <MappingFragment StoreEntitySet="AspNetUserRoles">
+                <ScalarProperty Name="Id_UR" ColumnName="Id_UR" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="db_admin_proyectosModel.AspNetUsers">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel1.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -1000,7 +1022,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="comentario_por_tarea">
-            <EntityTypeMapping TypeName="db_admin_proyectosModel.comentario_por_tarea">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel1.comentario_por_tarea">
               <MappingFragment StoreEntitySet="comentario_por_tarea">
                 <ScalarProperty Name="id_comentario" ColumnName="id_comentario" />
                 <ScalarProperty Name="comentario" ColumnName="comentario" />
@@ -1011,7 +1033,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="comentarios_foro">
-            <EntityTypeMapping TypeName="db_admin_proyectosModel.comentarios_foro">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel1.comentarios_foro">
               <MappingFragment StoreEntitySet="comentarios_foro">
                 <ScalarProperty Name="id_comentario_foro" ColumnName="id_comentario_foro" />
                 <ScalarProperty Name="comentario" ColumnName="comentario" />
@@ -1022,7 +1044,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="estado">
-            <EntityTypeMapping TypeName="db_admin_proyectosModel.estado">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel1.estado">
               <MappingFragment StoreEntitySet="estado">
                 <ScalarProperty Name="id_estado" ColumnName="id_estado" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
@@ -1030,7 +1052,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="foro">
-            <EntityTypeMapping TypeName="db_admin_proyectosModel.foro">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel1.foro">
               <MappingFragment StoreEntitySet="foro">
                 <ScalarProperty Name="id_foro" ColumnName="id_foro" />
                 <ScalarProperty Name="cod_proyecto" ColumnName="cod_proyecto" />
@@ -1038,7 +1060,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="historico_tarea">
-            <EntityTypeMapping TypeName="db_admin_proyectosModel.historico_tarea">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel1.historico_tarea">
               <MappingFragment StoreEntitySet="historico_tarea">
                 <ScalarProperty Name="id_log" ColumnName="id_log" />
                 <ScalarProperty Name="cod_tarea" ColumnName="cod_tarea" />
@@ -1049,7 +1071,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="proyecto">
-            <EntityTypeMapping TypeName="db_admin_proyectosModel.proyecto">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel1.proyecto">
               <MappingFragment StoreEntitySet="proyecto">
                 <ScalarProperty Name="id_proyecto" ColumnName="id_proyecto" />
                 <ScalarProperty Name="nombre_proyecto" ColumnName="nombre_proyecto" />
@@ -1060,7 +1082,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tarea">
-            <EntityTypeMapping TypeName="db_admin_proyectosModel.tarea">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel1.tarea">
               <MappingFragment StoreEntitySet="tarea">
                 <ScalarProperty Name="id_tarea" ColumnName="id_tarea" />
                 <ScalarProperty Name="observacion" ColumnName="observacion" />
@@ -1071,7 +1093,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="usuarios_por_proyecto">
-            <EntityTypeMapping TypeName="db_admin_proyectosModel.usuarios_por_proyecto">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel1.usuarios_por_proyecto">
               <MappingFragment StoreEntitySet="usuarios_por_proyecto">
                 <ScalarProperty Name="id_usuarioProyecto" ColumnName="id_usuarioProyecto" />
                 <ScalarProperty Name="cod_usuario" ColumnName="cod_usuario" />
@@ -1079,26 +1101,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="db_admin_proyectosModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="AspNetUsers">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <EntitySetMapping Name="AdministrarUsuarios">
-            <EntityTypeMapping TypeName="db_admin_proyectosModel.AdministrarUsuarios">
-              <MappingFragment StoreEntitySet="AdministrarUsuarios">
-                <ScalarProperty Name="rol" ColumnName="rol" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_asignar_rol" FunctionName="db_admin_proyectosModel.Store.sp_asignar_rol" />
-          <FunctionImportMapping FunctionImportName="sp_cambio_rol_reporte" FunctionName="db_admin_proyectosModel.Store.sp_cambio_rol_reporte" />
-          <FunctionImportMapping FunctionImportName="sp_registrar_usuario_rol_reporte" FunctionName="db_admin_proyectosModel.Store.sp_registrar_usuario_rol_reporte" />
+          <FunctionImportMapping FunctionImportName="sp_asignar_rol" FunctionName="db_admin_proyectosModel1.Store.sp_asignar_rol" />
+          <FunctionImportMapping FunctionImportName="sp_cambio_rol_reporte" FunctionName="db_admin_proyectosModel1.Store.sp_cambio_rol_reporte" />
+          <FunctionImportMapping FunctionImportName="sp_registrar_usuario_rol_reporte" FunctionName="db_admin_proyectosModel1.Store.sp_registrar_usuario_rol_reporte" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
