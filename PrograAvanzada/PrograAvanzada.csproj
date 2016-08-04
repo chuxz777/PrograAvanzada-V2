@@ -173,6 +173,8 @@
     <Compile Include="Controllers\AspNetUserRolesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\proyectoController.cs" />
+    <Compile Include="Controllers\tareasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -317,6 +319,16 @@
     <Content Include="Views\AspNetUserRoles\Details.cshtml" />
     <Content Include="Views\AspNetUserRoles\Edit.cshtml" />
     <Content Include="Views\AspNetUserRoles\Index.cshtml" />
+    <Content Include="Views\proyecto\Create.cshtml" />
+    <Content Include="Views\proyecto\Delete.cshtml" />
+    <Content Include="Views\proyecto\Details.cshtml" />
+    <Content Include="Views\proyecto\Edit.cshtml" />
+    <Content Include="Views\proyecto\Index.cshtml" />
+    <Content Include="Views\tareas\Create.cshtml" />
+    <Content Include="Views\tareas\Delete.cshtml" />
+    <Content Include="Views\tareas\Details.cshtml" />
+    <Content Include="Views\tareas\Edit.cshtml" />
+    <Content Include="Views\tareas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

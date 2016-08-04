@@ -80,5 +80,18 @@ namespace PrograAvanzada.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_registrar_usuario_rol_reporte", emailParameter, rolParameter);
         }
+    
+        public virtual int SP_UsuarioProyecto(string cod_usuario, Nullable<int> cod_proyecto)
+        {
+            var cod_usuarioParameter = cod_usuario != null ?
+                new ObjectParameter("cod_usuario", cod_usuario) :
+                new ObjectParameter("cod_usuario", typeof(string));
+    
+            var cod_proyectoParameter = cod_proyecto.HasValue ?
+                new ObjectParameter("cod_proyecto", cod_proyecto) :
+                new ObjectParameter("cod_proyecto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UsuarioProyecto", cod_usuarioParameter, cod_proyectoParameter);
+        }
     }
 }

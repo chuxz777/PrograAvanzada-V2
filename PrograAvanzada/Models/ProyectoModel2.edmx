@@ -370,6 +370,10 @@
           <Parameter Name="email" Type="nvarchar" Mode="In" />
           <Parameter Name="rol" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="SP_UsuarioProyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cod_usuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="cod_proyecto" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="db_admin_proyectosModel1StoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -950,6 +954,10 @@
             <Parameter Name="email" Mode="In" Type="String" />
             <Parameter Name="rol" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="SP_UsuarioProyecto">
+            <Parameter Name="cod_usuario" Mode="In" Type="String" />
+            <Parameter Name="cod_proyecto" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -1104,6 +1112,7 @@
           <FunctionImportMapping FunctionImportName="sp_asignar_rol" FunctionName="db_admin_proyectosModel1.Store.sp_asignar_rol" />
           <FunctionImportMapping FunctionImportName="sp_cambio_rol_reporte" FunctionName="db_admin_proyectosModel1.Store.sp_cambio_rol_reporte" />
           <FunctionImportMapping FunctionImportName="sp_registrar_usuario_rol_reporte" FunctionName="db_admin_proyectosModel1.Store.sp_registrar_usuario_rol_reporte" />
+          <FunctionImportMapping FunctionImportName="SP_UsuarioProyecto" FunctionName="db_admin_proyectosModel1.Store.SP_UsuarioProyecto" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -25,14 +25,18 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 
-                    <li>@Html.ActionLink("Proyectos", "Contact", "Home")</li>
+                    @if (!(User.IsInRole("Analistas") || User.IsInRole("Desarrolladores")))
+                    {
+                        <li>@Html.ActionLink("Proyectos", "Index", "proyecto")</li>
+                    }
+
 
                     @if (User.IsInRole("Administrador de Proyectos"))
                     {
                        <li>@Html.ActionLink("Usuarios", "Index", "AspNetUserRoles")</li>
                     }
 
-                    <li>@Html.ActionLink("Tareas", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Tareas", "Index", "Tareas")</li>
 
                 </ul>
                 @Html.Partial("_LoginPartial")
