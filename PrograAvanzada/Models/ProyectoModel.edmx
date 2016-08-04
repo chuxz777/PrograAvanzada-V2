@@ -1,0 +1,1125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="db_admin_proyectosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdministrarUsuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="256" />
+          <Property Name="rol" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="comentario_por_tarea">
+          <Key>
+            <PropertyRef Name="id_comentario" />
+          </Key>
+          <Property Name="id_comentario" Type="int" Nullable="false" />
+          <Property Name="comentario" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="fecha_comentario" Type="date" Nullable="false" />
+          <Property Name="cod_tarea" Type="int" Nullable="false" />
+          <Property Name="cod_usuario" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="comentarios_foro">
+          <Key>
+            <PropertyRef Name="id_comentario_foro" />
+          </Key>
+          <Property Name="id_comentario_foro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="comentario" Type="nvarchar" MaxLength="255" />
+          <Property Name="fecha_comentario" Type="datetime" Nullable="false" />
+          <Property Name="cod_foro" Type="int" Nullable="false" />
+          <Property Name="cod_usuario" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="estado">
+          <Key>
+            <PropertyRef Name="id_estado" />
+          </Key>
+          <Property Name="id_estado" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="foro">
+          <Key>
+            <PropertyRef Name="id_foro" />
+          </Key>
+          <Property Name="id_foro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_proyecto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="historico_tarea">
+          <Key>
+            <PropertyRef Name="id_log" />
+          </Key>
+          <Property Name="id_log" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_tarea" Type="int" Nullable="false" />
+          <Property Name="cod_usuarioProyecto" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="observacion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="fecha_cambio" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="proyecto">
+          <Key>
+            <PropertyRef Name="id_proyecto" />
+          </Key>
+          <Property Name="id_proyecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_proyecto" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="admin_asignado" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="cod_estado" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tarea">
+          <Key>
+            <PropertyRef Name="id_tarea" />
+          </Key>
+          <Property Name="id_tarea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="observacion" Type="nvarchar" MaxLength="250" />
+          <Property Name="cod_proyecto" Type="int" Nullable="false" />
+          <Property Name="cod_estado" Type="smallint" Nullable="false" />
+          <Property Name="cod_usuarioAsignado" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuarios_por_proyecto">
+          <Key>
+            <PropertyRef Name="id_usuarioProyecto" />
+          </Key>
+          <Property Name="id_usuarioProyecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_usuario" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="cod_proyecto" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_comentarioForo_Foro">
+          <End Role="foro" Type="Self.foro" Multiplicity="1" />
+          <End Role="comentarios_foro" Type="Self.comentarios_foro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="foro">
+              <PropertyRef Name="id_foro" />
+            </Principal>
+            <Dependent Role="comentarios_foro">
+              <PropertyRef Name="cod_foro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_comentarioForo_Usuario">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="comentarios_foro" Type="Self.comentarios_foro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="comentarios_foro">
+              <PropertyRef Name="cod_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_comentarioTarea_tarea">
+          <End Role="tarea" Type="Self.tarea" Multiplicity="1" />
+          <End Role="comentario_por_tarea" Type="Self.comentario_por_tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tarea">
+              <PropertyRef Name="id_tarea" />
+            </Principal>
+            <Dependent Role="comentario_por_tarea">
+              <PropertyRef Name="cod_tarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_comentarioTarea_Usuario">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="comentario_por_tarea" Type="Self.comentario_por_tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="comentario_por_tarea">
+              <PropertyRef Name="cod_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_foro_proyecto">
+          <End Role="proyecto" Type="Self.proyecto" Multiplicity="1" />
+          <End Role="foro" Type="Self.foro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proyecto">
+              <PropertyRef Name="id_proyecto" />
+            </Principal>
+            <Dependent Role="foro">
+              <PropertyRef Name="cod_proyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_historico_tarea">
+          <End Role="tarea" Type="Self.tarea" Multiplicity="1" />
+          <End Role="historico_tarea" Type="Self.historico_tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tarea">
+              <PropertyRef Name="id_tarea" />
+            </Principal>
+            <Dependent Role="historico_tarea">
+              <PropertyRef Name="cod_tarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_historico_usuario">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="historico_tarea" Type="Self.historico_tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="historico_tarea">
+              <PropertyRef Name="cod_usuarioProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_proyecto_estado">
+          <End Role="estado" Type="Self.estado" Multiplicity="1" />
+          <End Role="proyecto" Type="Self.proyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="proyecto">
+              <PropertyRef Name="cod_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_proyecto_usuario">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="proyecto" Type="Self.proyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="proyecto">
+              <PropertyRef Name="admin_asignado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tarea_estado">
+          <End Role="estado" Type="Self.estado" Multiplicity="1" />
+          <End Role="tarea" Type="Self.tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="tarea">
+              <PropertyRef Name="cod_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tarea_proyecto">
+          <End Role="proyecto" Type="Self.proyecto" Multiplicity="1" />
+          <End Role="tarea" Type="Self.tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proyecto">
+              <PropertyRef Name="id_proyecto" />
+            </Principal>
+            <Dependent Role="tarea">
+              <PropertyRef Name="cod_proyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tarea_usuarioAsignado">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="tarea" Type="Self.tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tarea">
+              <PropertyRef Name="cod_usuarioAsignado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuarioProyecto_Proyecto">
+          <End Role="proyecto" Type="Self.proyecto" Multiplicity="1" />
+          <End Role="usuarios_por_proyecto" Type="Self.usuarios_por_proyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proyecto">
+              <PropertyRef Name="id_proyecto" />
+            </Principal>
+            <Dependent Role="usuarios_por_proyecto">
+              <PropertyRef Name="cod_proyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuarioProyecto_usuario">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="usuarios_por_proyecto" Type="Self.usuarios_por_proyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="usuarios_por_proyecto">
+              <PropertyRef Name="cod_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_asignar_rol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+          <Parameter Name="RoleId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_cambio_rol_reporte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="rol" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_registrar_usuario_rol_reporte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="rol" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="db_admin_proyectosModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdministrarUsuarios" EntityType="Self.AdministrarUsuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comentario_por_tarea" EntityType="Self.comentario_por_tarea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comentarios_foro" EntityType="Self.comentarios_foro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="estado" EntityType="Self.estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="foro" EntityType="Self.foro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="historico_tarea" EntityType="Self.historico_tarea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="proyecto" EntityType="Self.proyecto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tarea" EntityType="Self.tarea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuarios_por_proyecto" EntityType="Self.usuarios_por_proyecto" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_comentarioForo_Foro" Association="Self.fk_comentarioForo_Foro">
+            <End Role="foro" EntitySet="foro" />
+            <End Role="comentarios_foro" EntitySet="comentarios_foro" />
+          </AssociationSet>
+          <AssociationSet Name="fk_comentarioForo_Usuario" Association="Self.fk_comentarioForo_Usuario">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="comentarios_foro" EntitySet="comentarios_foro" />
+          </AssociationSet>
+          <AssociationSet Name="fk_comentarioTarea_tarea" Association="Self.fk_comentarioTarea_tarea">
+            <End Role="tarea" EntitySet="tarea" />
+            <End Role="comentario_por_tarea" EntitySet="comentario_por_tarea" />
+          </AssociationSet>
+          <AssociationSet Name="fk_comentarioTarea_Usuario" Association="Self.fk_comentarioTarea_Usuario">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="comentario_por_tarea" EntitySet="comentario_por_tarea" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_foro_proyecto" Association="Self.fk_foro_proyecto">
+            <End Role="proyecto" EntitySet="proyecto" />
+            <End Role="foro" EntitySet="foro" />
+          </AssociationSet>
+          <AssociationSet Name="fk_historico_tarea" Association="Self.fk_historico_tarea">
+            <End Role="tarea" EntitySet="tarea" />
+            <End Role="historico_tarea" EntitySet="historico_tarea" />
+          </AssociationSet>
+          <AssociationSet Name="fk_historico_usuario" Association="Self.fk_historico_usuario">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="historico_tarea" EntitySet="historico_tarea" />
+          </AssociationSet>
+          <AssociationSet Name="fk_proyecto_estado" Association="Self.fk_proyecto_estado">
+            <End Role="estado" EntitySet="estado" />
+            <End Role="proyecto" EntitySet="proyecto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_proyecto_usuario" Association="Self.fk_proyecto_usuario">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="proyecto" EntitySet="proyecto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tarea_estado" Association="Self.fk_tarea_estado">
+            <End Role="estado" EntitySet="estado" />
+            <End Role="tarea" EntitySet="tarea" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tarea_proyecto" Association="Self.fk_tarea_proyecto">
+            <End Role="proyecto" EntitySet="proyecto" />
+            <End Role="tarea" EntitySet="tarea" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tarea_usuarioAsignado" Association="Self.fk_tarea_usuarioAsignado">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="tarea" EntitySet="tarea" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuarioProyecto_Proyecto" Association="Self.fk_usuarioProyecto_Proyecto">
+            <End Role="proyecto" EntitySet="proyecto" />
+            <End Role="usuarios_por_proyecto" EntitySet="usuarios_por_proyecto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuarioProyecto_usuario" Association="Self.fk_usuarioProyecto_usuario">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="usuarios_por_proyecto" EntitySet="usuarios_por_proyecto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_admin_proyectosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="comentarios_foro" Relationship="Self.fk_comentarioForo_Usuario" FromRole="AspNetUsers" ToRole="comentarios_foro" />
+          <NavigationProperty Name="comentario_por_tarea" Relationship="Self.fk_comentarioTarea_Usuario" FromRole="AspNetUsers" ToRole="comentario_por_tarea" />
+          <NavigationProperty Name="historico_tarea" Relationship="Self.fk_historico_usuario" FromRole="AspNetUsers" ToRole="historico_tarea" />
+          <NavigationProperty Name="proyecto" Relationship="Self.fk_proyecto_usuario" FromRole="AspNetUsers" ToRole="proyecto" />
+          <NavigationProperty Name="tarea" Relationship="Self.fk_tarea_usuarioAsignado" FromRole="AspNetUsers" ToRole="tarea" />
+          <NavigationProperty Name="usuarios_por_proyecto" Relationship="Self.fk_usuarioProyecto_usuario" FromRole="AspNetUsers" ToRole="usuarios_por_proyecto" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="comentario_por_tarea">
+          <Key>
+            <PropertyRef Name="id_comentario" />
+          </Key>
+          <Property Name="id_comentario" Type="Int32" Nullable="false" />
+          <Property Name="comentario" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fecha_comentario" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cod_tarea" Type="Int32" Nullable="false" />
+          <Property Name="cod_usuario" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.fk_comentarioTarea_Usuario" FromRole="comentario_por_tarea" ToRole="AspNetUsers" />
+          <NavigationProperty Name="tarea" Relationship="Self.fk_comentarioTarea_tarea" FromRole="comentario_por_tarea" ToRole="tarea" />
+        </EntityType>
+        <EntityType Name="comentarios_foro">
+          <Key>
+            <PropertyRef Name="id_comentario_foro" />
+          </Key>
+          <Property Name="id_comentario_foro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="comentario" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fecha_comentario" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cod_foro" Type="Int32" Nullable="false" />
+          <Property Name="cod_usuario" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.fk_comentarioForo_Usuario" FromRole="comentarios_foro" ToRole="AspNetUsers" />
+          <NavigationProperty Name="foro" Relationship="Self.fk_comentarioForo_Foro" FromRole="comentarios_foro" ToRole="foro" />
+        </EntityType>
+        <EntityType Name="estado">
+          <Key>
+            <PropertyRef Name="id_estado" />
+          </Key>
+          <Property Name="id_estado" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="proyecto" Relationship="Self.fk_proyecto_estado" FromRole="estado" ToRole="proyecto" />
+          <NavigationProperty Name="tarea" Relationship="Self.fk_tarea_estado" FromRole="estado" ToRole="tarea" />
+        </EntityType>
+        <EntityType Name="foro">
+          <Key>
+            <PropertyRef Name="id_foro" />
+          </Key>
+          <Property Name="id_foro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_proyecto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="comentarios_foro" Relationship="Self.fk_comentarioForo_Foro" FromRole="foro" ToRole="comentarios_foro" />
+          <NavigationProperty Name="proyecto" Relationship="Self.fk_foro_proyecto" FromRole="foro" ToRole="proyecto" />
+        </EntityType>
+        <EntityType Name="historico_tarea">
+          <Key>
+            <PropertyRef Name="id_log" />
+          </Key>
+          <Property Name="id_log" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_tarea" Type="Int32" Nullable="false" />
+          <Property Name="cod_usuarioProyecto" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_cambio" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.fk_historico_usuario" FromRole="historico_tarea" ToRole="AspNetUsers" />
+          <NavigationProperty Name="tarea" Relationship="Self.fk_historico_tarea" FromRole="historico_tarea" ToRole="tarea" />
+        </EntityType>
+        <EntityType Name="proyecto">
+          <Key>
+            <PropertyRef Name="id_proyecto" />
+          </Key>
+          <Property Name="id_proyecto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_proyecto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="admin_asignado" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cod_estado" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.fk_proyecto_usuario" FromRole="proyecto" ToRole="AspNetUsers" />
+          <NavigationProperty Name="estado" Relationship="Self.fk_proyecto_estado" FromRole="proyecto" ToRole="estado" />
+          <NavigationProperty Name="foro" Relationship="Self.fk_foro_proyecto" FromRole="proyecto" ToRole="foro" />
+          <NavigationProperty Name="tarea" Relationship="Self.fk_tarea_proyecto" FromRole="proyecto" ToRole="tarea" />
+          <NavigationProperty Name="usuarios_por_proyecto" Relationship="Self.fk_usuarioProyecto_Proyecto" FromRole="proyecto" ToRole="usuarios_por_proyecto" />
+        </EntityType>
+        <EntityType Name="tarea">
+          <Key>
+            <PropertyRef Name="id_tarea" />
+          </Key>
+          <Property Name="id_tarea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="cod_proyecto" Type="Int32" Nullable="false" />
+          <Property Name="cod_estado" Type="Int16" Nullable="false" />
+          <Property Name="cod_usuarioAsignado" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.fk_tarea_usuarioAsignado" FromRole="tarea" ToRole="AspNetUsers" />
+          <NavigationProperty Name="comentario_por_tarea" Relationship="Self.fk_comentarioTarea_tarea" FromRole="tarea" ToRole="comentario_por_tarea" />
+          <NavigationProperty Name="estado" Relationship="Self.fk_tarea_estado" FromRole="tarea" ToRole="estado" />
+          <NavigationProperty Name="historico_tarea" Relationship="Self.fk_historico_tarea" FromRole="tarea" ToRole="historico_tarea" />
+          <NavigationProperty Name="proyecto" Relationship="Self.fk_tarea_proyecto" FromRole="tarea" ToRole="proyecto" />
+        </EntityType>
+        <EntityType Name="usuarios_por_proyecto">
+          <Key>
+            <PropertyRef Name="id_usuarioProyecto" />
+          </Key>
+          <Property Name="id_usuarioProyecto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_usuario" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cod_proyecto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.fk_usuarioProyecto_usuario" FromRole="usuarios_por_proyecto" ToRole="AspNetUsers" />
+          <NavigationProperty Name="proyecto" Relationship="Self.fk_usuarioProyecto_Proyecto" FromRole="usuarios_por_proyecto" ToRole="proyecto" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_comentarioForo_Usuario">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="comentarios_foro" Type="Self.comentarios_foro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="comentarios_foro">
+              <PropertyRef Name="cod_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_comentarioTarea_Usuario">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="comentario_por_tarea" Type="Self.comentario_por_tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="comentario_por_tarea">
+              <PropertyRef Name="cod_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_historico_usuario">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="historico_tarea" Type="Self.historico_tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="historico_tarea">
+              <PropertyRef Name="cod_usuarioProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_proyecto_usuario">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="proyecto" Type="Self.proyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="proyecto">
+              <PropertyRef Name="admin_asignado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tarea_usuarioAsignado">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="tarea" Type="Self.tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tarea">
+              <PropertyRef Name="cod_usuarioAsignado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuarioProyecto_usuario">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="usuarios_por_proyecto" Type="Self.usuarios_por_proyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="usuarios_por_proyecto">
+              <PropertyRef Name="cod_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_comentarioTarea_tarea">
+          <End Role="tarea" Type="Self.tarea" Multiplicity="1" />
+          <End Role="comentario_por_tarea" Type="Self.comentario_por_tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tarea">
+              <PropertyRef Name="id_tarea" />
+            </Principal>
+            <Dependent Role="comentario_por_tarea">
+              <PropertyRef Name="cod_tarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_comentarioForo_Foro">
+          <End Role="foro" Type="Self.foro" Multiplicity="1" />
+          <End Role="comentarios_foro" Type="Self.comentarios_foro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="foro">
+              <PropertyRef Name="id_foro" />
+            </Principal>
+            <Dependent Role="comentarios_foro">
+              <PropertyRef Name="cod_foro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_proyecto_estado">
+          <End Role="estado" Type="Self.estado" Multiplicity="1" />
+          <End Role="proyecto" Type="Self.proyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="proyecto">
+              <PropertyRef Name="cod_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tarea_estado">
+          <End Role="estado" Type="Self.estado" Multiplicity="1" />
+          <End Role="tarea" Type="Self.tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="tarea">
+              <PropertyRef Name="cod_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_foro_proyecto">
+          <End Role="proyecto" Type="Self.proyecto" Multiplicity="1" />
+          <End Role="foro" Type="Self.foro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proyecto">
+              <PropertyRef Name="id_proyecto" />
+            </Principal>
+            <Dependent Role="foro">
+              <PropertyRef Name="cod_proyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_historico_tarea">
+          <End Role="tarea" Type="Self.tarea" Multiplicity="1" />
+          <End Role="historico_tarea" Type="Self.historico_tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tarea">
+              <PropertyRef Name="id_tarea" />
+            </Principal>
+            <Dependent Role="historico_tarea">
+              <PropertyRef Name="cod_tarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tarea_proyecto">
+          <End Role="proyecto" Type="Self.proyecto" Multiplicity="1" />
+          <End Role="tarea" Type="Self.tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proyecto">
+              <PropertyRef Name="id_proyecto" />
+            </Principal>
+            <Dependent Role="tarea">
+              <PropertyRef Name="cod_proyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuarioProyecto_Proyecto">
+          <End Role="proyecto" Type="Self.proyecto" Multiplicity="1" />
+          <End Role="usuarios_por_proyecto" Type="Self.usuarios_por_proyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proyecto">
+              <PropertyRef Name="id_proyecto" />
+            </Principal>
+            <Dependent Role="usuarios_por_proyecto">
+              <PropertyRef Name="cod_proyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="db_admin_proyectosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="comentario_por_tarea" EntityType="Self.comentario_por_tarea" />
+          <EntitySet Name="comentarios_foro" EntityType="Self.comentarios_foro" />
+          <EntitySet Name="estado" EntityType="Self.estado" />
+          <EntitySet Name="foro" EntityType="Self.foro" />
+          <EntitySet Name="historico_tarea" EntityType="Self.historico_tarea" />
+          <EntitySet Name="proyecto" EntityType="Self.proyecto" />
+          <EntitySet Name="tarea" EntityType="Self.tarea" />
+          <EntitySet Name="usuarios_por_proyecto" EntityType="Self.usuarios_por_proyecto" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="fk_comentarioForo_Usuario" Association="Self.fk_comentarioForo_Usuario">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="comentarios_foro" EntitySet="comentarios_foro" />
+          </AssociationSet>
+          <AssociationSet Name="fk_comentarioTarea_Usuario" Association="Self.fk_comentarioTarea_Usuario">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="comentario_por_tarea" EntitySet="comentario_por_tarea" />
+          </AssociationSet>
+          <AssociationSet Name="fk_historico_usuario" Association="Self.fk_historico_usuario">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="historico_tarea" EntitySet="historico_tarea" />
+          </AssociationSet>
+          <AssociationSet Name="fk_proyecto_usuario" Association="Self.fk_proyecto_usuario">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="proyecto" EntitySet="proyecto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tarea_usuarioAsignado" Association="Self.fk_tarea_usuarioAsignado">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="tarea" EntitySet="tarea" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuarioProyecto_usuario" Association="Self.fk_usuarioProyecto_usuario">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="usuarios_por_proyecto" EntitySet="usuarios_por_proyecto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_comentarioTarea_tarea" Association="Self.fk_comentarioTarea_tarea">
+            <End Role="tarea" EntitySet="tarea" />
+            <End Role="comentario_por_tarea" EntitySet="comentario_por_tarea" />
+          </AssociationSet>
+          <AssociationSet Name="fk_comentarioForo_Foro" Association="Self.fk_comentarioForo_Foro">
+            <End Role="foro" EntitySet="foro" />
+            <End Role="comentarios_foro" EntitySet="comentarios_foro" />
+          </AssociationSet>
+          <AssociationSet Name="fk_proyecto_estado" Association="Self.fk_proyecto_estado">
+            <End Role="estado" EntitySet="estado" />
+            <End Role="proyecto" EntitySet="proyecto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tarea_estado" Association="Self.fk_tarea_estado">
+            <End Role="estado" EntitySet="estado" />
+            <End Role="tarea" EntitySet="tarea" />
+          </AssociationSet>
+          <AssociationSet Name="fk_foro_proyecto" Association="Self.fk_foro_proyecto">
+            <End Role="proyecto" EntitySet="proyecto" />
+            <End Role="foro" EntitySet="foro" />
+          </AssociationSet>
+          <AssociationSet Name="fk_historico_tarea" Association="Self.fk_historico_tarea">
+            <End Role="tarea" EntitySet="tarea" />
+            <End Role="historico_tarea" EntitySet="historico_tarea" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tarea_proyecto" Association="Self.fk_tarea_proyecto">
+            <End Role="proyecto" EntitySet="proyecto" />
+            <End Role="tarea" EntitySet="tarea" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuarioProyecto_Proyecto" Association="Self.fk_usuarioProyecto_Proyecto">
+            <End Role="proyecto" EntitySet="proyecto" />
+            <End Role="usuarios_por_proyecto" EntitySet="usuarios_por_proyecto" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="AdministrarUsuarios" EntityType="db_admin_proyectosModel.AdministrarUsuarios" />
+          <FunctionImport Name="sp_asignar_rol">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="RoleId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_cambio_rol_reporte">
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="rol" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_registrar_usuario_rol_reporte">
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="rol" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="AdministrarUsuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="rol" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_admin_proyectosModelStoreContainer" CdmEntityContainer="db_admin_proyectosEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comentario_por_tarea">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel.comentario_por_tarea">
+              <MappingFragment StoreEntitySet="comentario_por_tarea">
+                <ScalarProperty Name="id_comentario" ColumnName="id_comentario" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="fecha_comentario" ColumnName="fecha_comentario" />
+                <ScalarProperty Name="cod_tarea" ColumnName="cod_tarea" />
+                <ScalarProperty Name="cod_usuario" ColumnName="cod_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comentarios_foro">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel.comentarios_foro">
+              <MappingFragment StoreEntitySet="comentarios_foro">
+                <ScalarProperty Name="id_comentario_foro" ColumnName="id_comentario_foro" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="fecha_comentario" ColumnName="fecha_comentario" />
+                <ScalarProperty Name="cod_foro" ColumnName="cod_foro" />
+                <ScalarProperty Name="cod_usuario" ColumnName="cod_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estado">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel.estado">
+              <MappingFragment StoreEntitySet="estado">
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="foro">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel.foro">
+              <MappingFragment StoreEntitySet="foro">
+                <ScalarProperty Name="id_foro" ColumnName="id_foro" />
+                <ScalarProperty Name="cod_proyecto" ColumnName="cod_proyecto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="historico_tarea">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel.historico_tarea">
+              <MappingFragment StoreEntitySet="historico_tarea">
+                <ScalarProperty Name="id_log" ColumnName="id_log" />
+                <ScalarProperty Name="cod_tarea" ColumnName="cod_tarea" />
+                <ScalarProperty Name="cod_usuarioProyecto" ColumnName="cod_usuarioProyecto" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="fecha_cambio" ColumnName="fecha_cambio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="proyecto">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel.proyecto">
+              <MappingFragment StoreEntitySet="proyecto">
+                <ScalarProperty Name="id_proyecto" ColumnName="id_proyecto" />
+                <ScalarProperty Name="nombre_proyecto" ColumnName="nombre_proyecto" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="admin_asignado" ColumnName="admin_asignado" />
+                <ScalarProperty Name="cod_estado" ColumnName="cod_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tarea">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel.tarea">
+              <MappingFragment StoreEntitySet="tarea">
+                <ScalarProperty Name="id_tarea" ColumnName="id_tarea" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="cod_proyecto" ColumnName="cod_proyecto" />
+                <ScalarProperty Name="cod_estado" ColumnName="cod_estado" />
+                <ScalarProperty Name="cod_usuarioAsignado" ColumnName="cod_usuarioAsignado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios_por_proyecto">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel.usuarios_por_proyecto">
+              <MappingFragment StoreEntitySet="usuarios_por_proyecto">
+                <ScalarProperty Name="id_usuarioProyecto" ColumnName="id_usuarioProyecto" />
+                <ScalarProperty Name="cod_usuario" ColumnName="cod_usuario" />
+                <ScalarProperty Name="cod_proyecto" ColumnName="cod_proyecto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="db_admin_proyectosModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="AdministrarUsuarios">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel.AdministrarUsuarios">
+              <MappingFragment StoreEntitySet="AdministrarUsuarios">
+                <ScalarProperty Name="rol" ColumnName="rol" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_asignar_rol" FunctionName="db_admin_proyectosModel.Store.sp_asignar_rol" />
+          <FunctionImportMapping FunctionImportName="sp_cambio_rol_reporte" FunctionName="db_admin_proyectosModel.Store.sp_cambio_rol_reporte" />
+          <FunctionImportMapping FunctionImportName="sp_registrar_usuario_rol_reporte" FunctionName="db_admin_proyectosModel.Store.sp_registrar_usuario_rol_reporte" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
