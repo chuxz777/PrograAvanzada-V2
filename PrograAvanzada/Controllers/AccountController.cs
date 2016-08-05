@@ -9,13 +9,17 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PrograAvanzada.Models;
-
+using System.Net.Mail;
+using System.Net;
+using PrograAvanzada.Services;
 
 namespace PrograAvanzada.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        EnviarCorreo Enviar = new EnviarCorreo();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private db_admin_proyectosEntities1 db = new db_admin_proyectosEntities1();
@@ -165,6 +169,7 @@ namespace PrograAvanzada.Controllers
 
                     if (result.Succeeded)
                     {
+   
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -228,6 +233,7 @@ namespace PrograAvanzada.Controllers
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
 
+                EnviarCorreo.EnviaCorreoContraseña(callbackUrl.ToString());
 
                 return Redirect(callbackUrl.ToString());
 
@@ -440,6 +446,8 @@ namespace PrograAvanzada.Controllers
 
             base.Dispose(disposing);
         }
+
+       
 
         #region Helpers
         // Used for XSRF protection when adding external logins
