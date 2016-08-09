@@ -21,11 +21,11 @@ namespace PrograAvanzada.Controllers
             return View(historico_tarea.ToList());
         }
 
-        public ActionResult IndexPorTareas(string tarea)
+        public ActionResult IndexPorTareas(int codtarea)
         {
             var httarea =
-                from historico_tarea in db.historico_tarea.Include(h => h.AspNetUsers).Include(h => h.tarea)
-                where historico_tarea.observacion == tarea
+                from historico_tarea in db.historico_tarea
+                where historico_tarea.cod_tarea == codtarea
                 select historico_tarea;
             return View(httarea.ToList());
         }

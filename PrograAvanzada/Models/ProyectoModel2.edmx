@@ -41,9 +41,13 @@
           <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'db_admin_proyectos.dbo.AspNetUserRoles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AspNetUserRoles">
           <Key>
             <PropertyRef Name="Id_UR" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
           </Key>
           <Property Name="Id_UR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
@@ -215,7 +219,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetRoles">
@@ -227,7 +233,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
@@ -358,17 +366,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="sp_asignar_rol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
-          <Parameter Name="RoleId" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_cambio_rol_reporte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="email" Type="nvarchar" Mode="In" />
-          <Parameter Name="rol" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_registrar_usuario_rol_reporte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="email" Type="nvarchar" Mode="In" />
-          <Parameter Name="rol" Type="nvarchar" Mode="In" />
+        <Function Name="SP_Registro_Histrorico_Tarea" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cod_tarea" Type="int" Mode="In" />
+          <Parameter Name="cod_usuarioProyecto" Type="nvarchar" Mode="In" />
+          <Parameter Name="observacion" Type="nvarchar" Mode="In" />
+          <Parameter Name="fecha_cambio" Type="date" Mode="In" />
         </Function>
         <Function Name="SP_UsuarioProyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cod_usuario" Type="nvarchar" Mode="In" />
@@ -379,7 +381,6 @@
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="comentario_por_tarea" EntityType="Self.comentario_por_tarea" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="comentarios_foro" EntityType="Self.comentarios_foro" Schema="dbo" store:Type="Tables" />
@@ -389,6 +390,13 @@
           <EntitySet Name="proyecto" EntityType="Self.proyecto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tarea" EntityType="Self.tarea" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuarios_por_proyecto" EntityType="Self.usuarios_por_proyecto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AspNetUserRoles].[Id_UR] AS [Id_UR], 
+    [AspNetUserRoles].[UserId] AS [UserId], 
+    [AspNetUserRoles].[RoleId] AS [RoleId]
+    FROM [dbo].[AspNetUserRoles] AS [AspNetUserRoles]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="fk_comentarioForo_Foro" Association="Self.fk_comentarioForo_Foro">
             <End Role="foro" EntitySet="foro" />
             <End Role="comentarios_foro" EntitySet="comentarios_foro" />
@@ -482,7 +490,7 @@
           </Key>
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetRoles" ToRole="AspNetUserRoles" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="db_admin_proyectosModel1.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetRoles" ToRole="AspNetUserRoles" />
         </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
@@ -505,16 +513,6 @@
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="AspNetUserRoles">
-          <Key>
-            <PropertyRef Name="Id_UR" />
-          </Key>
-          <Property Name="Id_UR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetUserRoles" ToRole="AspNetRoles" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUserRoles" ToRole="AspNetUsers" />
-        </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
@@ -533,13 +531,13 @@
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserRoles" />
           <NavigationProperty Name="comentarios_foro" Relationship="Self.fk_comentarioForo_Usuario" FromRole="AspNetUsers" ToRole="comentarios_foro" />
           <NavigationProperty Name="comentario_por_tarea" Relationship="Self.fk_comentarioTarea_Usuario" FromRole="AspNetUsers" ToRole="comentario_por_tarea" />
           <NavigationProperty Name="historico_tarea" Relationship="Self.fk_historico_usuario" FromRole="AspNetUsers" ToRole="historico_tarea" />
           <NavigationProperty Name="proyecto" Relationship="Self.fk_proyecto_usuario" FromRole="AspNetUsers" ToRole="proyecto" />
           <NavigationProperty Name="tarea" Relationship="Self.fk_tarea_usuarioAsignado" FromRole="AspNetUsers" ToRole="tarea" />
           <NavigationProperty Name="usuarios_por_proyecto" Relationship="Self.fk_usuarioProyecto_usuario" FromRole="AspNetUsers" ToRole="usuarios_por_proyecto" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="db_admin_proyectosModel1.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserRoles" />
         </EntityType>
         <EntityType Name="comentario_por_tarea">
           <Key>
@@ -635,18 +633,6 @@
           <NavigationProperty Name="AspNetUsers" Relationship="Self.fk_usuarioProyecto_usuario" FromRole="usuarios_por_proyecto" ToRole="AspNetUsers" />
           <NavigationProperty Name="proyecto" Relationship="Self.fk_usuarioProyecto_Proyecto" FromRole="usuarios_por_proyecto" ToRole="proyecto" />
         </EntityType>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -671,18 +657,6 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -860,7 +834,6 @@
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
-          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
           <EntitySet Name="comentario_por_tarea" EntityType="Self.comentario_por_tarea" />
           <EntitySet Name="comentarios_foro" EntityType="Self.comentarios_foro" />
@@ -870,10 +843,6 @@
           <EntitySet Name="proyecto" EntityType="Self.proyecto" />
           <EntitySet Name="tarea" EntityType="Self.tarea" />
           <EntitySet Name="usuarios_por_proyecto" EntityType="Self.usuarios_por_proyecto" />
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -881,10 +850,6 @@
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <AssociationSet Name="fk_comentarioForo_Usuario" Association="Self.fk_comentarioForo_Usuario">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -958,7 +923,62 @@
             <Parameter Name="cod_usuario" Mode="In" Type="String" />
             <Parameter Name="cod_proyecto" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SP_Registro_Histrorico_Tarea">
+            <Parameter Name="cod_tarea" Mode="In" Type="Int32" />
+            <Parameter Name="cod_usuarioProyecto" Mode="In" Type="String" />
+            <Parameter Name="observacion" Mode="In" Type="String" />
+            <Parameter Name="fecha_cambio" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="AspNetUserRoles" EntityType="db_admin_proyectosModel1.AspNetUserRoles" />
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="db_admin_proyectosModel1.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="db_admin_proyectosModel1.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="Id_UR" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="Id_UR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRoles" Relationship="db_admin_proyectosModel1.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetUserRoles" ToRole="AspNetRoles" />
+          <NavigationProperty Name="AspNetUsers" Relationship="db_admin_proyectosModel1.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUserRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Type="db_admin_proyectosModel1.AspNetRoles" Role="AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="db_admin_proyectosModel1.AspNetUserRoles" Role="AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Type="db_admin_proyectosModel1.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="db_admin_proyectosModel1.AspNetUserRoles" Role="AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -999,15 +1019,6 @@
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserRoles">
-            <EntityTypeMapping TypeName="db_admin_proyectosModel1.AspNetUserRoles">
-              <MappingFragment StoreEntitySet="AspNetUserRoles">
-                <ScalarProperty Name="Id_UR" ColumnName="Id_UR" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1109,10 +1120,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_asignar_rol" FunctionName="db_admin_proyectosModel1.Store.sp_asignar_rol" />
-          <FunctionImportMapping FunctionImportName="sp_cambio_rol_reporte" FunctionName="db_admin_proyectosModel1.Store.sp_cambio_rol_reporte" />
-          <FunctionImportMapping FunctionImportName="sp_registrar_usuario_rol_reporte" FunctionName="db_admin_proyectosModel1.Store.sp_registrar_usuario_rol_reporte" />
           <FunctionImportMapping FunctionImportName="SP_UsuarioProyecto" FunctionName="db_admin_proyectosModel1.Store.SP_UsuarioProyecto" />
+          <FunctionImportMapping FunctionImportName="SP_Registro_Histrorico_Tarea" FunctionName="db_admin_proyectosModel1.Store.SP_Registro_Histrorico_Tarea" />
+          <EntitySetMapping Name="AspNetUserRoles">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel1.AspNetUserRoles">
+              <MappingFragment StoreEntitySet="AspNetUserRoles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id_UR" ColumnName="Id_UR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -28,12 +28,12 @@ namespace PrograAvanzada.Controllers
             i = id;
 
             var _tarea =
-                from aux in db.tarea.Include(t => t.AspNetUsers).Include(t => t.estado).Include(t => t.proyecto)
-                where aux.id_tarea == id
-                select aux.observacion;
+                from aux in db.historico_tarea.Include(t => t.tarea)
+                where aux.cod_tarea == id
+                select aux.tarea.id_tarea;
 
-            string a = _tarea.FirstOrDefault();
-            string sitio = "~/historico_tarea/IndexPorTareas" + "?" + "tarea=" + a;
+            int a = _tarea.FirstOrDefault();
+            string sitio = "~/historico_tarea/IndexPorTareas" + "?" + "codtarea=" + a;
             Response.Redirect(sitio);
         }
         
@@ -111,7 +111,13 @@ namespace PrograAvanzada.Controllers
             ViewBag.cod_usuarioAsignado = new SelectList(db.AspNetUsers, "Id", "Email", tarea.cod_usuarioAsignado);
             ViewBag.cod_estado = new SelectList(db.estado, "id_estado", "descripcion", tarea.cod_estado);
             ViewBag.cod_proyecto = new SelectList(db.proyecto, "id_proyecto", "nombre_proyecto", tarea.cod_proyecto);
+
+            DateTime now = System.DateTime.Now;
+
+            db.SP_Registro_Histrorico_Tarea(tarea.id_tarea,tarea.cod_usuarioAsignado,"Cambio de Estado",now);
+
             return View(tarea);
+
         }
 
         // POST: tareas/Edit/5

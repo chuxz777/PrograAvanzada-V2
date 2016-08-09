@@ -31,7 +31,6 @@ namespace PrograAvanzada.Models
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<comentario_por_tarea> comentario_por_tarea { get; set; }
         public virtual DbSet<comentarios_foro> comentarios_foro { get; set; }
@@ -41,6 +40,7 @@ namespace PrograAvanzada.Models
         public virtual DbSet<proyecto> proyecto { get; set; }
         public virtual DbSet<tarea> tarea { get; set; }
         public virtual DbSet<usuarios_por_proyecto> usuarios_por_proyecto { get; set; }
+        public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
     
         public virtual int sp_asignar_rol(string userId, string roleId)
         {
@@ -92,6 +92,27 @@ namespace PrograAvanzada.Models
                 new ObjectParameter("cod_proyecto", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UsuarioProyecto", cod_usuarioParameter, cod_proyectoParameter);
+        }
+    
+        public virtual int SP_Registro_Histrorico_Tarea(Nullable<int> cod_tarea, string cod_usuarioProyecto, string observacion, Nullable<System.DateTime> fecha_cambio)
+        {
+            var cod_tareaParameter = cod_tarea.HasValue ?
+                new ObjectParameter("cod_tarea", cod_tarea) :
+                new ObjectParameter("cod_tarea", typeof(int));
+    
+            var cod_usuarioProyectoParameter = cod_usuarioProyecto != null ?
+                new ObjectParameter("cod_usuarioProyecto", cod_usuarioProyecto) :
+                new ObjectParameter("cod_usuarioProyecto", typeof(string));
+    
+            var observacionParameter = observacion != null ?
+                new ObjectParameter("observacion", observacion) :
+                new ObjectParameter("observacion", typeof(string));
+    
+            var fecha_cambioParameter = fecha_cambio.HasValue ?
+                new ObjectParameter("fecha_cambio", fecha_cambio) :
+                new ObjectParameter("fecha_cambio", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Registro_Histrorico_Tarea", cod_tareaParameter, cod_usuarioProyectoParameter, observacionParameter, fecha_cambioParameter);
         }
     }
 }
