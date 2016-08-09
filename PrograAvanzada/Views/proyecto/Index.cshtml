@@ -22,16 +22,16 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.nombre_proyecto)
+                @Html.DisplayName("Nombre del Proyecto")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.descripcion)
+                @Html.DisplayName("Descripcion")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+                @Html.DisplayName("Correo Electronico")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.estado.descripcion)
+                @Html.DisplayName("Estado")
             </th>
             <th></th>
         </tr>
@@ -53,8 +53,6 @@
                 </td>
                 <td>
                     @Html.ActionLink("Editar", "Edit", new { id = item.id_proyecto }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.id_proyecto }) |
-                    @Html.ActionLink("Borrar", "Delete", new { id = item.id_proyecto }) |
                     @Html.ActionLink("Ver Tareas", "Ver", new { id = item.id_proyecto})
         </td>
         </tr>

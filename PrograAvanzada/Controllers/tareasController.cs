@@ -27,16 +27,33 @@ namespace PrograAvanzada.Controllers
             int i;
             i = id;
 
-            var _tarea =
-                from aux in db.historico_tarea.Include(t => t.tarea)
+            var _comentariotarea =
+                from aux in db.comentario_por_tarea
                 where aux.cod_tarea == id
                 select aux.tarea.id_tarea;
 
-            int a = _tarea.FirstOrDefault();
-            string sitio = "~/historico_tarea/IndexPorTareas" + "?" + "codtarea=" + a;
+            int a = _comentariotarea.FirstOrDefault();
+            string sitio = "~/comentario_por_tarea/IndexComentarioPorTarea" + "?" + "idtareapar=" + a;
             Response.Redirect(sitio);
         }
-        
+
+        //public void Ver(int id)
+        //{
+        //    int i;
+        //    i = id;
+
+        //    var _tarea =
+        //        from aux in db.historico_tarea.Include(t => t.tarea)
+        //        where aux.cod_tarea == id
+        //        select aux.tarea.id_tarea;
+
+        //    int a = _tarea.FirstOrDefault();
+        //    string sitio = "~/historico_tarea/IndexPorTareas" + "?" + "codtarea=" + a;
+        //    Response.Redirect(sitio);
+        //}
+
+
+
         public ActionResult IndexPorProyecto(string proyecto)
         {
             var tarea = 

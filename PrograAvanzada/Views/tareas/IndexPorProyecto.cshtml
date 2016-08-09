@@ -12,16 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.observacion)
+            @Html.DisplayName("Tarea")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+            @Html.DisplayName("Correo Electronico")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.estado.descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.proyecto.nombre_proyecto)
+            @Html.DisplayName("Estado")
         </th>
         <th></th>
     </tr>
@@ -37,15 +34,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.estado.descripcion)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.proyecto.nombre_proyecto)
-        </td>
+
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id_tarea }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_tarea }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_tarea })
-            @Html.ActionLink("Ver Historico", "Ver", new { id = item.id_tarea })
+            @Html.ActionLink("Ver Comentarios", "Ver", new { id = item.id_tarea })
 
+            @*@Html.ActionLink("Ver Historico", "Ver", new { id = item.id_tarea })*@
         </td>
     </tr>
 }
