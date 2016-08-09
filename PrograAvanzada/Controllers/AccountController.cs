@@ -12,7 +12,6 @@ using PrograAvanzada.Models;
 using System.Net.Mail;
 using System.Net;
 using PrograAvanzada.Services;
-using CaptchaMvc.HtmlHelpers;
 
 namespace PrograAvanzada.Controllers
 {
@@ -160,20 +159,13 @@ namespace PrograAvanzada.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
-                var estado_capcha = false;
-
-                // Code for validating the CAPTCHA  
-                if (this.IsCaptchaValid("Captcha is not valid"))
-                {
-                    estado_capcha = true;
-                }
-                
+                                                
                 if (model.Email.Contains("@gmail.com"))
                 {
                 //    db.sp_asignar_rol(user.Id, "5");
                  //   db.SaveChanges();
 
-                    if (result.Succeeded && estado_capcha==true)
+                    if (result.Succeeded)
                     {
    
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
