@@ -4,56 +4,66 @@
     ViewBag.Title = "Proyectos";
 }
 
+
+
 <ul class="nav nav-tabs span2 clearfix">
 
-<br> </br>
+    <br> </br>
 
-<div class="panel panel-default">
-    <div class="panel-body">
-        <h2>Proyectos</h2>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h2>Proyectos</h2>
+        </div>
     </div>
-</div>
 
-<p>
-    @Html.ActionLink("Crear Nuevo Proyecto", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre_proyecto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado.descripcion)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Crear Nuevo Proyecto", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre_proyecto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado.descripcion)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre_proyecto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado.descripcion)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.id_proyecto }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.id_proyecto }) |
-            @Html.ActionLink("Borrar", "Delete", new { id=item.id_proyecto })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre_proyecto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estado.descripcion)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.id_proyecto }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.id_proyecto }) |
+                    @Html.ActionLink("Borrar", "Delete", new { id = item.id_proyecto }) |
+                    @Html.ActionLink("Ver Tareas", "Ver", new { id = item.nombre_proyecto})
 
-</table>
+                    @Html.ActionLink("Ver Tareas 2", "Ver2", new { id = item.id_proyecto })
+      
+                    <li><a href="~/tareas/IndexPorProyecto?proyecto=Putiarsh">Link</a></li>
+
+
+        </td>
+        </tr>
+        }
+
+        </table>

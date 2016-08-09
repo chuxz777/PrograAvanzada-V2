@@ -21,6 +21,16 @@ namespace PrograAvanzada.Controllers
             return View(tarea.ToList());
         }
 
+        public ActionResult IndexPorProyecto(string proyecto)
+        {
+            var tarea = 
+                from tareas_proyecto in  db.tarea.Include(t => t.AspNetUsers).Include(t => t.estado).Include(t => t.proyecto)
+                where tareas_proyecto.proyecto.nombre_proyecto == proyecto
+                select tareas_proyecto;
+            return View(tarea.ToList());
+        }
+
+
         // GET: tareas/Details/5
         public ActionResult Details(int? id)
         {

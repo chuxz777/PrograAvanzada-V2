@@ -20,6 +20,38 @@ namespace PrograAvanzada.Controllers
             var proyecto = db.proyecto.Include(p => p.AspNetUsers).Include(p => p.estado);
             return View(proyecto.ToList());
         }
+    
+        public ActionResult Ver(string proyecto)
+        {
+            string a;
+
+            a = proyecto;
+            return RedirectToAction("tareas/IndexPorProyecto");
+
+        }
+
+        [HttpGet, ValidateInput(false)]
+        public void Ver2(int id)
+        {
+            int i;
+            i = id;
+
+            var _proyecto =
+                from aux in db.tarea.Include(t => t.AspNetUsers).Include(t => t.estado).Include(t => t.proyecto)
+                where aux.proyecto.id_proyecto == id
+                select aux.proyecto.nombre_proyecto;
+
+            string a = _proyecto.FirstOrDefault();
+
+ 
+
+            string sitio = "~/tareas/IndexPorProyecto" + "?"+"proyecto=" + a;
+
+            //  return RedirectToAction("~/tareas/IndexPorProyecto?proyecto=Putiarsh");
+
+             Response.Redirect(sitio);
+
+        }
 
         // GET: proyecto/Details/5
         public ActionResult Details(int? id)
