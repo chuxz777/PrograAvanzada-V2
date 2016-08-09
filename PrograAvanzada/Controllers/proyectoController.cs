@@ -33,7 +33,7 @@ namespace PrograAvanzada.Controllers
                 select aux.proyecto.nombre_proyecto;
 
             string a = _proyecto.FirstOrDefault();
-            string sitio = "~/tareas/IndexPorProyecto" + "?"+"proyecto=" + a
+            string sitio = "~/tareas/IndexPorProyecto" + "?" + "proyecto=" + a;
              Response.Redirect(sitio);
         }
 
