@@ -21,6 +21,22 @@ namespace PrograAvanzada.Controllers
             return View(tarea.ToList());
         }
 
+        [HttpGet, ValidateInput(false)]
+        public void Ver(int id)
+        {
+            int i;
+            i = id;
+
+            var _tarea =
+                from aux in db.tarea.Include(t => t.AspNetUsers).Include(t => t.estado).Include(t => t.proyecto)
+                where aux.id_tarea == id
+                select aux.observacion;
+
+            string a = _tarea.FirstOrDefault();
+            string sitio = "~/historico_tarea/IndexPorTareas" + "?" + "tarea=" + a;
+            Response.Redirect(sitio);
+        }
+        
         public ActionResult IndexPorProyecto(string proyecto)
         {
             var tarea = 

@@ -176,6 +176,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AspNetUserRolesController.cs" />
+    <Compile Include="Controllers\historico_tareaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\proyectoController.cs" />
@@ -359,6 +360,12 @@
     <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.0.min.map" />
     <Content Include="Views\tareas\IndexPorProyecto.cshtml" />
+    <Content Include="Views\historico_tarea\Create.cshtml" />
+    <Content Include="Views\historico_tarea\Delete.cshtml" />
+    <Content Include="Views\historico_tarea\Details.cshtml" />
+    <Content Include="Views\historico_tarea\Edit.cshtml" />
+    <Content Include="Views\historico_tarea\Index.cshtml" />
+    <Content Include="Views\historico_tarea\IndexPorTareas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

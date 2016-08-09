@@ -1,0 +1,50 @@
+﻿@model PrograAvanzada.Models.historico_tarea
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>historico_tarea</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.observacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.observacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_cambio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_cambio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUsers.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tarea.observacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tarea.observacion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_log }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
