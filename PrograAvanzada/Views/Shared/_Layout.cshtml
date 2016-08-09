@@ -17,26 +17,26 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand" href="~/Home/Index">
+                    <img style="height: 25px;"
+                         src="~/Content/Resource/icono.jpg" /><br />
+                </a>                
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-
+                    
                     @if (!(User.IsInRole("Analistas") || User.IsInRole("Desarrolladores")))
                     {
-                        <li>@Html.ActionLink("Proyectos", "Index", "proyecto")</li>
+                        <li>@Html.ActionLink(" Proyectos", "Index", "proyecto", null, new { @class = "active glyphicon glyphicon-folder-open" })</li>
                     }
 
 
                     @if (User.IsInRole("Administrador de Proyectos"))
                     {
-                       <li>@Html.ActionLink("Usuarios", "Index", "AspNetUserRoles")</li>
+                        <li>@Html.ActionLink(" Usuarios", "Index", "AspNetUserRoles", null, new { @class = "active glyphicon glyphicon-user" })</li>
                     }
 
-                    <li>@Html.ActionLink("Tareas", "Index", "Tareas")</li>
+                    <li>@Html.ActionLink(" Tareas", "Index", "Tareas", null, new { @class = "active glyphicon glyphicon-th-list" })</li>
 
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -47,7 +47,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>Proyecto de Programacion Avanzada, desarrollado por: Mena Granados Oscar, Picado Jose Alberto, Rojas Umaña Jesus</p>
         </footer>
     </div>
 
