@@ -1,13 +1,21 @@
 ﻿@model IEnumerable<PrograAvanzada.Models.proyecto>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Proyectos";
 }
 
-<h2>Index</h2>
+<ul class="nav nav-tabs span2 clearfix">
+
+<br> </br>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h2>Proyectos</h2>
+    </div>
+</div>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear Nuevo Proyecto", "Create")
 </p>
 <table class="table">
     <tr>
@@ -41,9 +49,9 @@
             @Html.DisplayFor(modelItem => item.estado.descripcion)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_proyecto }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_proyecto }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_proyecto })
+            @Html.ActionLink("Editar", "Edit", new { id=item.id_proyecto }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.id_proyecto }) |
+            @Html.ActionLink("Borrar", "Delete", new { id=item.id_proyecto })
         </td>
     </tr>
 }

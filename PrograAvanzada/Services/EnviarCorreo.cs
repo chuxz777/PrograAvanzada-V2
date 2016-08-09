@@ -43,7 +43,7 @@ namespace PrograAvanzada.Services
             }
             catch (Exception e)
             {
-                Console.WriteLine("Could not end email\n\n" + e.ToString());
+                Console.WriteLine("No se pudo enviar el correo para reestablecer contraseña\n\n" + e.ToString());
             }
         }
 
