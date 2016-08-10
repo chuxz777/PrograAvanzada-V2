@@ -7,6 +7,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PrograAvanzada.Models;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace PrograAvanzada.Controllers
 {
@@ -28,6 +32,36 @@ namespace PrograAvanzada.Controllers
                                         select aux ;
             return View(_comentario_por_tarea.ToList());
         }
+
+        public void IndexComentarioPorTareaXML(int idtareapar)
+        {
+            var _comentario_por_tarea = from aux in db.comentario_por_tarea
+                                        where aux.tarea.id_tarea == idtareapar
+                                        select aux;
+          
+            var data = _comentario_por_tarea.ToList();
+
+            var xml_data = new XElement("Foos", data.Select(x => new XElement("comentario",
+                                                           new XAttribute("id_comentario", x.id_comentario),
+                                                           new XAttribute("comentario", x.comentario),
+                                                           new XAttribute("fecha_comentario", x.fecha_comentario),
+                                                           new XAttribute("cod_tarea", x.cod_tarea),
+                                                           new XAttribute("cod_usuario", x.cod_usuario)
+                                                           )));
+
+            XmlSerializer serialiser = new XmlSerializer(typeof(List<comentario_por_tarea>));
+
+            // Create the TextWriter for the serialiser to use
+            TextWriter Filestream = new StreamWriter(@"C:\output.xml");
+
+            //write to the file
+            serialiser.Serialize(Filestream, xml_data);
+
+            // Close the file
+            Filestream.Close();
+
+        }
+
 
         // GET: comentario_por_tarea/Details/5
         public ActionResult Details(int? id)
