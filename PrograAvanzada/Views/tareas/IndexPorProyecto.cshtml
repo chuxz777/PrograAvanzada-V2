@@ -4,10 +4,16 @@
     ViewBag.Title = "TareasPorProyecto";
 }
 
-<h2>TareasPorProyecto</h2>
+<br> </br>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h2>Tareas por Proyecto</h2>
+    </div>
+</div>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nueva tarea", "Create")
 </p>
 <table class="table">
     <tr>
@@ -36,7 +42,7 @@
         </td>
 
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_tarea }) |
+            @Html.ActionLink("Editar", "Edit", new { id=item.id_tarea }) |
             @Html.ActionLink("Ver Comentarios", "Ver", new { id = item.id_tarea })
 
             @*@Html.ActionLink("Ver Historico", "Ver", new { id = item.id_tarea })*@

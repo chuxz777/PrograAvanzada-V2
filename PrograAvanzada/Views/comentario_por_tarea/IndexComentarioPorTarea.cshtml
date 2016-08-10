@@ -4,10 +4,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<br> </br>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h2>Comentarios por tarea</h2>
+    </div>
+</div>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nuevo comentario", "Create")
 </p>
 <table class="table">
     <tr>
@@ -41,11 +47,10 @@
             @Html.DisplayFor(modelItem => item.tarea.observacion)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_comentario }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_comentario }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_comentario })
+            @Html.ActionLink("Editar", "Edit", new { id=item.id_comentario }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.id_comentario }) |
+            @Html.ActionLink("Borrar", "Delete", new { id=item.id_comentario })
         </td>
     </tr>
 }
-
 </table>

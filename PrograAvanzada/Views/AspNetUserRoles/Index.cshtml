@@ -4,18 +4,24 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<br> </br>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h2>Usuarios</h2>
+    </div>
+</div>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nuevo usuario", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetRoles.Name)
+            @Html.DisplayName("Nombre usuario")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+            @Html.DisplayName("Correo electronico")
         </th>
         <th></th>
     </tr>
@@ -29,11 +35,10 @@
             @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id_UR }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id_UR }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id_UR })
+            @Html.ActionLink("Editar", "Edit", new { id=item.Id_UR }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.Id_UR }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_UR })
         </td>
     </tr>
 }
-
 </table>
