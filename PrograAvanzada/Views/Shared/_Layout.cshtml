@@ -30,22 +30,25 @@
                         <li>@Html.ActionLink(" Proyectos", "Index", "proyecto", null, new { @class = "active glyphicon glyphicon-folder-open" })</li>
                     @*}*@
 
-
-
                     @*@if (User.IsInRole("Administrador de Proyectos"))
                     {*@
                         <li>@Html.ActionLink(" Usuarios", "Index", "AspNetUserRoles", null, new { @class = "active glyphicon glyphicon-user" })</li>
                     @*}*@
 
                     <li>@Html.ActionLink(" Tareas", "Index", "Tareas", null, new { @class = "active glyphicon glyphicon-th-list" })</li>
-                    <li>@Html.ActionLink(" Comentarios de Tareas", "Index", "comentario_por_tarea", null, new { @class = "active glyphicon glyphicon-th-list" })</li>
-                    <li>@Html.ActionLink(" Historico Tarea", "Index", "historico_tarea", null, new { @class = "active glyphicon glyphicon-th-list" })</li>
+                    <li>@Html.ActionLink(" Comentarios de Tareas", "Index", "comentario_por_tarea", null, new { @class = "active glyphicon glyphicon-comment" })</li>
+                    <li>@Html.ActionLink(" Historico Tarea", "Index", "historico_tarea", null, new { @class = "active glyphicon glyphicon-calendar" })</li>
                    
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+
+
+
+
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -71,7 +74,6 @@
 
     <div class="navbar navbar-fixed-bottom">
         <footer class="text-center">
-            <br><br>
             <p>Proyecto de Programacion Avanzada, desarrollado por: Mena Granados Oscar, Picado Arguedas Jose Alberto, Rojas Umaña Jesus</p>
         </footer>
     </div>
