@@ -125,13 +125,11 @@ namespace PrograAvanzada.Controllers
             {
                 return HttpNotFound();
             }
+            
             ViewBag.cod_usuarioAsignado = new SelectList(db.AspNetUsers, "Id", "Email", tarea.cod_usuarioAsignado);
             ViewBag.cod_estado = new SelectList(db.estado, "id_estado", "descripcion", tarea.cod_estado);
             ViewBag.cod_proyecto = new SelectList(db.proyecto, "id_proyecto", "nombre_proyecto", tarea.cod_proyecto);
-
-            DateTime now = System.DateTime.Now;
-
-            db.SP_Registro_Histrorico_Tarea(tarea.id_tarea,tarea.cod_usuarioAsignado,"Cambio de Estado",now);
+            ViewBag.cod_estado = new SelectList(db.estado, "id_estado", "descripcion", tarea.cod_estado);
 
             return View(tarea);
 
@@ -144,15 +142,52 @@ namespace PrograAvanzada.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id_tarea,observacion,cod_proyecto,cod_estado,cod_usuarioAsignado")] tarea tarea)
         {
+            // variables de valores antes de ser actualizados
+            var _aux_usuario =
+                from aux in db.AspNetUsers.Include(t => t.tarea)
+                where aux.Id == tarea.cod_usuarioAsignado
+                select aux.Email;
+            string asignado = _aux_usuario.FirstOrDefault();
+
+
+            var _aux_estado =
+                from aux in db.tarea.Include(t => t.AspNetUsers).Include(t => t.estado).Include(t => t.proyecto)
+                where aux.id_tarea == tarea.id_tarea
+                select aux.estado.descripcion;
+            string estado = Convert.ToString(_aux_estado.FirstOrDefault());
+
+            // variables que van a ser actualizadas
+
+            var _aux_usuario_nuevo =
+                from aux in db.AspNetUsers
+                where aux.Id == tarea.cod_usuarioAsignado
+                select aux.Email;
+            string asignado_nuevo = _aux_usuario_nuevo.FirstOrDefault();
+
+            var _aux_estado_nuevo =
+                from aux in db.estado
+                where aux.id_estado == tarea.cod_estado
+                select aux.descripcion;
+            string estado_nuevo = Convert.ToString(_aux_estado_nuevo.FirstOrDefault());
+
+            DateTime now = System.DateTime.Now;
+
+            int aux_id_tarea = tarea.id_tarea;
+            string detalleCambios = "Cambio estado: " + estado + " -> " + estado_nuevo +
+                                    " | Cambio de asignado: " + asignado + " -> " + asignado_nuevo ;
+            
             if (ModelState.IsValid)
             {
                 db.Entry(tarea).State = EntityState.Modified;
                 db.SaveChanges();
+                db.SP_Registro_Histrorico_Tarea(aux_id_tarea, tarea.cod_usuarioAsignado, detalleCambios, now);
                 return RedirectToAction("Index");
             }
+
             ViewBag.cod_usuarioAsignado = new SelectList(db.AspNetUsers, "Id", "Email", tarea.cod_usuarioAsignado);
             ViewBag.cod_estado = new SelectList(db.estado, "id_estado", "descripcion", tarea.cod_estado);
             ViewBag.cod_proyecto = new SelectList(db.proyecto, "id_proyecto", "nombre_proyecto", tarea.cod_proyecto);
+
             return View(tarea);
         }
 
