@@ -12,13 +12,13 @@
     </div>
 </div>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>¿Esta seguro que desea borrar este comentario?</h3>
 <div>
     <h4>Comentario</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.comentario)
+            @Html.DisplayName("Comentario: ")
         </dt>
 
         <dd>
@@ -26,7 +26,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.fecha_comentario)
+            @Html.DisplayName("Fecha del comentario: ")
         </dt>
 
         <dd>
@@ -34,7 +34,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+            @Html.DisplayName("Usuario asignado: ")
         </dt>
 
         <dd>
@@ -42,7 +42,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.tarea.observacion)
+            @Html.DisplayName("Observacion: ")
         </dt>
 
         <dd>
@@ -55,8 +55,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Borrar" class="btn btn-default" /> |
+            @Html.ActionLink("Atras", "Index")
         </div>
     }
 </div>
