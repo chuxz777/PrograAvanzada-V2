@@ -47,6 +47,7 @@
             @Html.ActionLink("Edit", "Edit", new { id=item.id_comentario }) |
             @Html.ActionLink("Details", "Details", new { id=item.id_comentario }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.id_comentario })
+            @Html.ActionLink("xml", "DownLoadFile", new { id = item.cod_tarea })
         </td>
     </tr>
 }

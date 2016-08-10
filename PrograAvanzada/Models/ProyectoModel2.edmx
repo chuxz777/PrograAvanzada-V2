@@ -74,7 +74,7 @@ warning 6002: The table/view 'db_admin_proyectos.dbo.AspNetUserRoles' does not h
           <Key>
             <PropertyRef Name="id_comentario" />
           </Key>
-          <Property Name="id_comentario" Type="int" Nullable="false" />
+          <Property Name="id_comentario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="comentario" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="fecha_comentario" Type="date" Nullable="false" />
           <Property Name="cod_tarea" Type="int" Nullable="false" />

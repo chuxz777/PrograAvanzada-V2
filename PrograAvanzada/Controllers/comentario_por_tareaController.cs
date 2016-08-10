@@ -11,6 +11,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.IO;
+using System.Text;
 
 namespace PrograAvanzada.Controllers
 {
@@ -33,35 +34,29 @@ namespace PrograAvanzada.Controllers
             return View(_comentario_por_tarea.ToList());
         }
 
-        public void IndexComentarioPorTareaXML(int idtareapar)
+        public ActionResult DownLoadFile(int id)
         {
             var _comentario_por_tarea = from aux in db.comentario_por_tarea
-                                        where aux.tarea.id_tarea == idtareapar
+                                        //where aux.tarea.id_tarea == id
                                         select aux;
-          
+
             var data = _comentario_por_tarea.ToList();
 
-            var xml_data = new XElement("Foos", data.Select(x => new XElement("comentario",
-                                                           new XAttribute("id_comentario", x.id_comentario),
-                                                           new XAttribute("comentario", x.comentario),
-                                                           new XAttribute("fecha_comentario", x.fecha_comentario),
-                                                           new XAttribute("cod_tarea", x.cod_tarea),
-                                                           new XAttribute("cod_usuario", x.cod_usuario)
-                                                           )));
+            var xml_data = new XElement("Registro_comentarios", data.Select(x => new XElement("Detalle",
+                                                                                   new XElement("id_comentario", x.id_comentario),
+                                                                                   new XElement("comentario", x.comentario),
+                                                                                   new XElement("fecha_comentario", x.fecha_comentario),
+                                                                                   new XElement("cod_tarea", x.cod_tarea),
+                                                                                   new XElement("cod_usuario", x.cod_usuario)
+                                                                                   )));
 
-            XmlSerializer serialiser = new XmlSerializer(typeof(List<comentario_por_tarea>));
-
-            // Create the TextWriter for the serialiser to use
-            TextWriter Filestream = new StreamWriter(@"C:\output.xml");
-
-            //write to the file
-            serialiser.Serialize(Filestream, xml_data);
-
-            // Close the file
-            Filestream.Close();
-
+            MemoryStream memoryStream = new MemoryStream();
+            TextWriter tw = new StreamWriter(memoryStream);
+            tw.WriteLine(xml_data);
+            tw.Flush();
+            tw.Close();
+            return File(memoryStream.GetBuffer(), "text/xml", "Comentarios.xml");
         }
-
 
         // GET: comentario_por_tarea/Details/5
         public ActionResult Details(int? id)
