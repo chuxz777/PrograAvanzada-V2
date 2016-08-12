@@ -58,11 +58,11 @@ namespace PrograAvanzada
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "200544384294-8fral1pv4128va3t4rovhm0aofk739jj.apps.googleusercontent.com",
+                ClientSecret = "EbNX7rilG6DoaZGJQ4-RToWv"
+            });
         }
     }
 }

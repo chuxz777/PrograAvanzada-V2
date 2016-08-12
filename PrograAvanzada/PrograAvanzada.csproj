@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AspNetUserRolesController.cs" />
     <Compile Include="Controllers\comentario_por_tareaController.cs" />
+    <Compile Include="Controllers\ForoController.cs" />
     <Compile Include="Controllers\historico_tareaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -369,6 +370,7 @@
     <Content Include="Views\comentario_por_tarea\Edit.cshtml" />
     <Content Include="Views\comentario_por_tarea\Index.cshtml" />
     <Content Include="Views\comentario_por_tarea\IndexComentarioPorTarea.cshtml" />
+    <Content Include="Views\Foro\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
