@@ -12,6 +12,7 @@ using PrograAvanzada.Models;
 using System.Net.Mail;
 using System.Net;
 using PrograAvanzada.Services;
+using Newtonsoft.Json.Linq;
 
 namespace PrograAvanzada.Controllers
 {
@@ -159,13 +160,16 @@ namespace PrograAvanzada.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
-                                                
+                string EncodedResponse = Request.Form["g-Recaptcha-Response"];
+                bool IsCaptchaValid = (ReCaptchaClass.Validate(EncodedResponse) == "true" ? true : false);
+
+
                 if (model.Email.Contains("@gmail.com"))
                 {
                 //    db.sp_asignar_rol(user.Id, "5");
                  //   db.SaveChanges();
 
-                    if (result.Succeeded)
+                    if (result.Succeeded && IsCaptchaValid)
                     {
    
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -445,7 +449,29 @@ namespace PrograAvanzada.Controllers
             base.Dispose(disposing);
         }
 
-       
+        [HttpPost]
+        public ActionResult FormSubmit()
+        {
+            //Validate Google recaptcha here
+            var response = Request["g-recaptcha-response"];
+            string secretKey = "6LeZ6iQTAAAAANOMxENYtV_6x-Q4cehCLX_oM7qG";
+            var client = new WebClient();
+            var result = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
+            var obj = JObject.Parse(result);
+            var status = (bool)obj.SelectToken("success");
+            ViewBag.Message = status ? "Google reCaptcha validation success" : "Google reCaptcha validation failed";
+
+            //When you will post form for save data, you should check both the model validation and google recaptcha validation
+            //EX.
+            /* if (ModelState.IsValid && status)
+            {
+
+            }*/
+
+            //Here I am returning to Index page for demo perpose, you can use your view here
+            return View("Index");
+        }
+
 
         #region Helpers
         // Used for XSRF protection when adding external logins

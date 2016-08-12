@@ -236,6 +236,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProyectoModel2.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReCaptchaClass.cs" />
     <Compile Include="Models\tarea.cs">
       <DependentUpon>ProyectoModel2.tt</DependentUpon>
     </Compile>
