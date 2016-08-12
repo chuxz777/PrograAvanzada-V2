@@ -54,9 +54,9 @@ namespace PrograAvanzada
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1223413757676826",
+               appSecret: "bdd1a13211d952c4e5b9dad1759e8c2e");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
