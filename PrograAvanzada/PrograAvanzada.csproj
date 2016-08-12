@@ -172,8 +172,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AspNetUserRolesController.cs" />
+    <Compile Include="Controllers\comentarios_foroController.cs" />
     <Compile Include="Controllers\comentario_por_tareaController.cs" />
-    <Compile Include="Controllers\ForoController.cs" />
+    <Compile Include="Controllers\foroController.cs" />
+    <Compile Include="Controllers\ForoPlantillaController.cs" />
     <Compile Include="Controllers\historico_tareaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -371,7 +373,13 @@
     <Content Include="Views\comentario_por_tarea\Edit.cshtml" />
     <Content Include="Views\comentario_por_tarea\Index.cshtml" />
     <Content Include="Views\comentario_por_tarea\IndexComentarioPorTarea.cshtml" />
-    <Content Include="Views\Foro\Index.cshtml" />
+    <Content Include="Views\foro\Create.cshtml" />
+    <Content Include="Views\foro\Edit.cshtml" />
+    <Content Include="Views\foro\Index.cshtml" />
+    <Content Include="Views\comentarios_foro\Index.cshtml" />
+    <Content Include="Views\ForoPlantilla\Index.cshtml" />
+    <Content Include="Views\foro\Index2.cshtml" />
+    <Content Include="Views\comentarios_foro\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

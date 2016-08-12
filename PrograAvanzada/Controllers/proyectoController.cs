@@ -37,6 +37,15 @@ namespace PrograAvanzada.Controllers
              Response.Redirect(sitio);
         }
 
+        [HttpGet, ValidateInput(false)]
+        public void VerForo(int id)
+        {
+            string sitio = "~/foro/Index" + "?" + "proyecto=" + id;
+            Response.Redirect(sitio);
+        }
+
+
+
         // GET: proyecto/Details/5
         public ActionResult Details(int? id)
         {

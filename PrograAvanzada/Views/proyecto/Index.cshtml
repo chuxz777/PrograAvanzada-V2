@@ -51,7 +51,8 @@
                 </td>
                 <td>
                     @Html.ActionLink("Editar", "Edit", new { id = item.id_proyecto }) |
-                    @Html.ActionLink("Ver tareas", "Ver", new { id = item.id_proyecto})
+                    @Html.ActionLink("Ver tareas", "Ver", new { id = item.id_proyecto })|
+                    @Html.ActionLink("Ir a Foro", "VerForo", new { id = item.id_proyecto })
         </td>
         </tr>
         }

@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Mierda 1</h2>
+
+@*@Html.Action("Index2", "foro")*@
+
+@Html.Partial("/foro/Index", new ViewDataDictionary { { "?proyecto=", 1 } })
+
+@Html.Action("Index2","foro")
+
+<h2>Mierda 2</h2>
+@Html.Action("Index2", "comentarios_foro")
