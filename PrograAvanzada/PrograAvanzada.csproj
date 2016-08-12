@@ -380,6 +380,7 @@
     <Content Include="Views\ForoPlantilla\Index.cshtml" />
     <Content Include="Views\foro\Index2.cshtml" />
     <Content Include="Views\comentarios_foro\Index2.cshtml" />
+    <Content Include="Views\comentarios_foro\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

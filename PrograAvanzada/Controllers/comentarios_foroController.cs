@@ -15,7 +15,7 @@ namespace PrograAvanzada.Controllers
         private db_admin_proyectosEntities1 db = new db_admin_proyectosEntities1();
 
         // GET: comentarios_foro
-        public ActionResult Index(int codForo)
+        public ActionResult Index2(int codForo)
         {
             var comentarios_foro =
             from datos in db.comentarios_foro
@@ -26,7 +26,7 @@ namespace PrograAvanzada.Controllers
                        
         }
 
-        public ActionResult Index2()
+        public ActionResult Index()
         {
             var comentarios_foro =
             from datos in db.comentarios_foro
@@ -56,7 +56,8 @@ namespace PrograAvanzada.Controllers
         {
             ViewBag.cod_usuario = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.cod_foro = new SelectList(db.foro, "id_foro", "id_foro");
-            return View();
+
+            return PartialView();
         }
 
         // POST: comentarios_foro/Create
@@ -70,12 +71,13 @@ namespace PrograAvanzada.Controllers
             {
                 db.comentarios_foro.Add(comentarios_foro);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+               /// return RedirectToAction("Index");
             }
 
             ViewBag.cod_usuario = new SelectList(db.AspNetUsers, "Id", "Email", comentarios_foro.cod_usuario);
             ViewBag.cod_foro = new SelectList(db.foro, "id_foro", "id_foro", comentarios_foro.cod_foro);
             return View(comentarios_foro);
+            
         }
 
         // GET: comentarios_foro/Edit/5

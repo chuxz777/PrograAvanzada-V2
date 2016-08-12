@@ -15,7 +15,7 @@ namespace PrograAvanzada.Controllers
         private db_admin_proyectosEntities1 db = new db_admin_proyectosEntities1();
 
         // GET: foro
-        public ActionResult Index(int proyecto)
+        public ActionResult Index2(int proyecto)
         {
 
             var foro =
@@ -27,7 +27,7 @@ namespace PrograAvanzada.Controllers
             
         }
 
-        public ActionResult Index2()
+        public ActionResult Index()
         {
 
             var foro =
@@ -75,7 +75,7 @@ namespace PrograAvanzada.Controllers
             {
                 db.foro.Add(foro);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("~/ForoPlantilla/Index");
             }
 
             ViewBag.cod_proyecto = new SelectList(db.proyecto, "id_proyecto", "nombre_proyecto", foro.cod_proyecto);

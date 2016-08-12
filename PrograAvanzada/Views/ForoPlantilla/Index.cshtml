@@ -1,14 +1,25 @@
 ﻿@{
     ViewBag.Title = "Index";
+    
 }
 
-<h2>Mierda 1</h2>
+<h2>Nombre del Foro</h2>
+@Html.Action("Index","foro")
 
-@*@Html.Action("Index2", "foro")*@
+<h2>Comentarios</h2>
+@Html.Action("Index", "comentarios_foro", new { codForo = 1 })
 
-@Html.Partial("/foro/Index", new ViewDataDictionary { { "?proyecto=", 1 } })
 
-@Html.Action("Index2","foro")
+<h2>Agregar Comentario</h2>
+@Html.Action("Create","comentarios_foro", null)
 
-<h2>Mierda 2</h2>
-@Html.Action("Index2", "comentarios_foro")
+
+
+<script type="text/javascript" src="~/Scripts/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+    setInterval(function () {
+        $("#notificationsTable").load("~/Views/ForoPlantilla/Index.cshtml");
+    }, 2000);
+    });
+ </script>
