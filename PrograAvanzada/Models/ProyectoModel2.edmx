@@ -532,24 +532,12 @@ warning 6002: The table/view 'db_admin_proyectos.dbo.AspNetUserRoles' does not h
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="comentarios_foro" Relationship="Self.fk_comentarioForo_Usuario" FromRole="AspNetUsers" ToRole="comentarios_foro" />
-          <NavigationProperty Name="comentario_por_tarea" Relationship="Self.fk_comentarioTarea_Usuario" FromRole="AspNetUsers" ToRole="comentario_por_tarea" />
           <NavigationProperty Name="historico_tarea" Relationship="Self.fk_historico_usuario" FromRole="AspNetUsers" ToRole="historico_tarea" />
           <NavigationProperty Name="proyecto" Relationship="Self.fk_proyecto_usuario" FromRole="AspNetUsers" ToRole="proyecto" />
           <NavigationProperty Name="tarea" Relationship="Self.fk_tarea_usuarioAsignado" FromRole="AspNetUsers" ToRole="tarea" />
           <NavigationProperty Name="usuarios_por_proyecto" Relationship="Self.fk_usuarioProyecto_usuario" FromRole="AspNetUsers" ToRole="usuarios_por_proyecto" />
           <NavigationProperty Name="AspNetUserRoles" Relationship="db_admin_proyectosModel1.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserRoles" />
-        </EntityType>
-        <EntityType Name="comentario_por_tarea">
-          <Key>
-            <PropertyRef Name="id_comentario" />
-          </Key>
-          <Property Name="id_comentario" Type="Int32" Nullable="false" />
-          <Property Name="comentario" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="fecha_comentario" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="cod_tarea" Type="Int32" Nullable="false" />
-          <Property Name="cod_usuario" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.fk_comentarioTarea_Usuario" FromRole="comentario_por_tarea" ToRole="AspNetUsers" />
-          <NavigationProperty Name="tarea" Relationship="Self.fk_comentarioTarea_tarea" FromRole="comentario_por_tarea" ToRole="tarea" />
+          <NavigationProperty Name="comentario_por_tarea" Relationship="db_admin_proyectosModel1.fk_comentarioTarea_Usuario" FromRole="AspNetUsers" ToRole="comentario_por_tarea" />
         </EntityType>
         <EntityType Name="comentarios_foro">
           <Key>
@@ -618,10 +606,10 @@ warning 6002: The table/view 'db_admin_proyectos.dbo.AspNetUserRoles' does not h
           <Property Name="cod_estado" Type="Int16" Nullable="false" />
           <Property Name="cod_usuarioAsignado" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.fk_tarea_usuarioAsignado" FromRole="tarea" ToRole="AspNetUsers" />
-          <NavigationProperty Name="comentario_por_tarea" Relationship="Self.fk_comentarioTarea_tarea" FromRole="tarea" ToRole="comentario_por_tarea" />
           <NavigationProperty Name="estado" Relationship="Self.fk_tarea_estado" FromRole="tarea" ToRole="estado" />
           <NavigationProperty Name="historico_tarea" Relationship="Self.fk_historico_tarea" FromRole="tarea" ToRole="historico_tarea" />
           <NavigationProperty Name="proyecto" Relationship="Self.fk_tarea_proyecto" FromRole="tarea" ToRole="proyecto" />
+          <NavigationProperty Name="comentario_por_tarea" Relationship="db_admin_proyectosModel1.fk_comentarioTarea_tarea" FromRole="tarea" ToRole="comentario_por_tarea" />
         </EntityType>
         <EntityType Name="usuarios_por_proyecto">
           <Key>
@@ -673,18 +661,6 @@ warning 6002: The table/view 'db_admin_proyectos.dbo.AspNetUserRoles' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_comentarioTarea_Usuario">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="comentario_por_tarea" Type="Self.comentario_por_tarea" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="comentario_por_tarea">
-              <PropertyRef Name="cod_usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_historico_usuario">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="historico_tarea" Type="Self.historico_tarea" Multiplicity="*" />
@@ -730,18 +706,6 @@ warning 6002: The table/view 'db_admin_proyectos.dbo.AspNetUserRoles' does not h
             </Principal>
             <Dependent Role="usuarios_por_proyecto">
               <PropertyRef Name="cod_usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_comentarioTarea_tarea">
-          <End Role="tarea" Type="Self.tarea" Multiplicity="1" />
-          <End Role="comentario_por_tarea" Type="Self.comentario_por_tarea" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tarea">
-              <PropertyRef Name="id_tarea" />
-            </Principal>
-            <Dependent Role="comentario_por_tarea">
-              <PropertyRef Name="cod_tarea" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -835,7 +799,6 @@ warning 6002: The table/view 'db_admin_proyectos.dbo.AspNetUserRoles' does not h
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
-          <EntitySet Name="comentario_por_tarea" EntityType="Self.comentario_por_tarea" />
           <EntitySet Name="comentarios_foro" EntityType="Self.comentarios_foro" />
           <EntitySet Name="estado" EntityType="Self.estado" />
           <EntitySet Name="foro" EntityType="Self.foro" />
@@ -855,10 +818,6 @@ warning 6002: The table/view 'db_admin_proyectos.dbo.AspNetUserRoles' does not h
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="comentarios_foro" EntitySet="comentarios_foro" />
           </AssociationSet>
-          <AssociationSet Name="fk_comentarioTarea_Usuario" Association="Self.fk_comentarioTarea_Usuario">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="comentario_por_tarea" EntitySet="comentario_por_tarea" />
-          </AssociationSet>
           <AssociationSet Name="fk_historico_usuario" Association="Self.fk_historico_usuario">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="historico_tarea" EntitySet="historico_tarea" />
@@ -874,10 +833,6 @@ warning 6002: The table/view 'db_admin_proyectos.dbo.AspNetUserRoles' does not h
           <AssociationSet Name="fk_usuarioProyecto_usuario" Association="Self.fk_usuarioProyecto_usuario">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="usuarios_por_proyecto" EntitySet="usuarios_por_proyecto" />
-          </AssociationSet>
-          <AssociationSet Name="fk_comentarioTarea_tarea" Association="Self.fk_comentarioTarea_tarea">
-            <End Role="tarea" EntitySet="tarea" />
-            <End Role="comentario_por_tarea" EntitySet="comentario_por_tarea" />
           </AssociationSet>
           <AssociationSet Name="fk_comentarioForo_Foro" Association="Self.fk_comentarioForo_Foro">
             <End Role="foro" EntitySet="foro" />
@@ -938,6 +893,15 @@ warning 6002: The table/view 'db_admin_proyectos.dbo.AspNetUserRoles' does not h
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <EntitySet Name="comentario_por_tarea" EntityType="db_admin_proyectosModel1.comentario_por_tarea" />
+          <AssociationSet Name="fk_comentarioTarea_Usuario" Association="db_admin_proyectosModel1.fk_comentarioTarea_Usuario">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="comentario_por_tarea" EntitySet="comentario_por_tarea" />
+          </AssociationSet>
+          <AssociationSet Name="fk_comentarioTarea_tarea" Association="db_admin_proyectosModel1.fk_comentarioTarea_tarea">
+            <End Role="tarea" EntitySet="tarea" />
+            <End Role="comentario_por_tarea" EntitySet="comentario_por_tarea" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AspNetUserRoles">
           <Key>
@@ -976,6 +940,42 @@ warning 6002: The table/view 'db_admin_proyectos.dbo.AspNetUserRoles' does not h
             </Principal>
             <Dependent Role="AspNetUserRoles">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="comentario_por_tarea">
+          <Key>
+            <PropertyRef Name="id_comentario" />
+          </Key>
+          <Property Name="id_comentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="comentario" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fecha_comentario" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cod_tarea" Type="Int32" Nullable="false" />
+          <Property Name="cod_usuario" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="db_admin_proyectosModel1.fk_comentarioTarea_Usuario" FromRole="comentario_por_tarea" ToRole="AspNetUsers" />
+          <NavigationProperty Name="tarea" Relationship="db_admin_proyectosModel1.fk_comentarioTarea_tarea" FromRole="comentario_por_tarea" ToRole="tarea" />
+        </EntityType>
+        <Association Name="fk_comentarioTarea_Usuario">
+          <End Type="db_admin_proyectosModel1.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="db_admin_proyectosModel1.comentario_por_tarea" Role="comentario_por_tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="comentario_por_tarea">
+              <PropertyRef Name="cod_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_comentarioTarea_tarea">
+          <End Type="db_admin_proyectosModel1.tarea" Role="tarea" Multiplicity="1" />
+          <End Type="db_admin_proyectosModel1.comentario_por_tarea" Role="comentario_por_tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tarea">
+              <PropertyRef Name="id_tarea" />
+            </Principal>
+            <Dependent Role="comentario_por_tarea">
+              <PropertyRef Name="cod_tarea" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1037,17 +1037,6 @@ warning 6002: The table/view 'db_admin_proyectos.dbo.AspNetUserRoles' does not h
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="comentario_por_tarea">
-            <EntityTypeMapping TypeName="db_admin_proyectosModel1.comentario_por_tarea">
-              <MappingFragment StoreEntitySet="comentario_por_tarea">
-                <ScalarProperty Name="id_comentario" ColumnName="id_comentario" />
-                <ScalarProperty Name="comentario" ColumnName="comentario" />
-                <ScalarProperty Name="fecha_comentario" ColumnName="fecha_comentario" />
-                <ScalarProperty Name="cod_tarea" ColumnName="cod_tarea" />
-                <ScalarProperty Name="cod_usuario" ColumnName="cod_usuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1128,6 +1117,17 @@ warning 6002: The table/view 'db_admin_proyectos.dbo.AspNetUserRoles' does not h
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id_UR" ColumnName="Id_UR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comentario_por_tarea">
+            <EntityTypeMapping TypeName="db_admin_proyectosModel1.comentario_por_tarea">
+              <MappingFragment StoreEntitySet="comentario_por_tarea">
+                <ScalarProperty Name="cod_usuario" ColumnName="cod_usuario" />
+                <ScalarProperty Name="cod_tarea" ColumnName="cod_tarea" />
+                <ScalarProperty Name="fecha_comentario" ColumnName="fecha_comentario" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="id_comentario" ColumnName="id_comentario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -8,6 +8,7 @@ namespace PrograAvanzada.Controllers
 {
     public class ForoPlantillaController : Controller
     {
+        //index creado para mostrar vista pasando valores por medio de viewbag
         // GET: ForoPlantilla
         public ActionResult Index(int id)
         {

@@ -14,6 +14,7 @@ namespace PrograAvanzada.Controllers
     {
         private db_admin_proyectosEntities1 db = new db_admin_proyectosEntities1();
 
+        //Retorna la vista con las tareas filtradas utilizando secuencia de linq
         // GET: tareas
         public ActionResult Index()
         {
@@ -21,6 +22,7 @@ namespace PrograAvanzada.Controllers
             return View(tarea.ToList());
         }
 
+        // Metodo para redirigir sitio web con filtro de comentraios por tarea
         [HttpGet, ValidateInput(false)]
         public void Ver(int id)
         {
@@ -52,8 +54,7 @@ namespace PrograAvanzada.Controllers
         //    Response.Redirect(sitio);
         //}
 
-
-
+        // Retorna vista con las tareas por proyecto usando linq
         public ActionResult IndexPorProyecto(string proyecto)
         {
             var tarea = 
@@ -62,7 +63,6 @@ namespace PrograAvanzada.Controllers
                 select tareas_proyecto;
             return View(tarea.ToList());
         }
-
 
         // GET: tareas/Details/5
         public ActionResult Details(int? id)
@@ -135,6 +135,7 @@ namespace PrograAvanzada.Controllers
 
         }
 
+        // guarda los cambios que se hicieron y crea variables que contienen los valores anteriores al cambio para agregarlos despues a el historial
         // POST: tareas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -148,7 +149,6 @@ namespace PrograAvanzada.Controllers
                 where aux.Id == tarea.cod_usuarioAsignado
                 select aux.Email;
             string asignado = _aux_usuario.FirstOrDefault();
-
 
             var _aux_estado =
                 from aux in db.tarea.Include(t => t.AspNetUsers).Include(t => t.estado).Include(t => t.proyecto)

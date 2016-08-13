@@ -4,13 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="48640a514eb04e5e97ac64581e8a2023" Name="Diagram1" ZoomLevel="81">
+      <Diagram DiagramId="48640a514eb04e5e97ac64581e8a2023" Name="Diagram1" ZoomLevel="89">
         <EntityTypeShape EntityType="db_admin_proyectosModel1.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="db_admin_proyectosModel1.AspNetRoles" Width="1.5" PointX="3.75" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="db_admin_proyectosModel1.AspNetUserClaims" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="db_admin_proyectosModel1.AspNetUserLogins" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
         <EntityTypeShape EntityType="db_admin_proyectosModel1.AspNetUsers" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_admin_proyectosModel1.comentario_por_tarea" Width="1.5" PointX="6" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="db_admin_proyectosModel1.comentarios_foro" Width="1.5" PointX="6" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="db_admin_proyectosModel1.estado" Width="1.5" PointX="6" PointY="23" IsExpanded="true" />
         <EntityTypeShape EntityType="db_admin_proyectosModel1.foro" Width="1.5" PointX="5.25" PointY="20" IsExpanded="true" />
@@ -21,12 +20,10 @@
         <AssociationConnector Association="db_admin_proyectosModel1.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="db_admin_proyectosModel1.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="db_admin_proyectosModel1.fk_comentarioForo_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="db_admin_proyectosModel1.fk_comentarioTarea_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="db_admin_proyectosModel1.fk_historico_usuario" ManuallyRouted="false" />
         <AssociationConnector Association="db_admin_proyectosModel1.fk_proyecto_usuario" ManuallyRouted="false" />
         <AssociationConnector Association="db_admin_proyectosModel1.fk_tarea_usuarioAsignado" ManuallyRouted="false" />
         <AssociationConnector Association="db_admin_proyectosModel1.fk_usuarioProyecto_usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="db_admin_proyectosModel1.fk_comentarioTarea_tarea" ManuallyRouted="false" />
         <AssociationConnector Association="db_admin_proyectosModel1.fk_comentarioForo_Foro" ManuallyRouted="false" />
         <AssociationConnector Association="db_admin_proyectosModel1.fk_proyecto_estado" ManuallyRouted="false" />
         <AssociationConnector Association="db_admin_proyectosModel1.fk_tarea_estado" ManuallyRouted="false" />
@@ -37,6 +34,9 @@
         <EntityTypeShape EntityType="db_admin_proyectosModel1.AspNetUserRoles" Width="1.5" PointX="6" PointY="7.75" />
         <AssociationConnector Association="db_admin_proyectosModel1.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" />
         <AssociationConnector Association="db_admin_proyectosModel1.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" />
+        <EntityTypeShape EntityType="db_admin_proyectosModel1.comentario_por_tarea" Width="1.5" PointX="6.5" PointY="11.875" />
+        <AssociationConnector Association="db_admin_proyectosModel1.fk_comentarioTarea_Usuario" />
+        <AssociationConnector Association="db_admin_proyectosModel1.fk_comentarioTarea_tarea" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

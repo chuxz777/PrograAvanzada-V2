@@ -17,8 +17,8 @@ namespace PrograAvanzada.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tarea()
         {
-            this.comentario_por_tarea = new HashSet<comentario_por_tarea>();
             this.historico_tarea = new HashSet<historico_tarea>();
+            this.comentario_por_tarea = new HashSet<comentario_por_tarea>();
         }
     
         public int id_tarea { get; set; }
@@ -28,11 +28,11 @@ namespace PrograAvanzada.Models
         public string cod_usuarioAsignado { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<comentario_por_tarea> comentario_por_tarea { get; set; }
         public virtual estado estado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<historico_tarea> historico_tarea { get; set; }
         public virtual proyecto proyecto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<comentario_por_tarea> comentario_por_tarea { get; set; }
     }
 }

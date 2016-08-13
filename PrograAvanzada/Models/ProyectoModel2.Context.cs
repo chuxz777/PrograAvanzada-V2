@@ -32,7 +32,6 @@ namespace PrograAvanzada.Models
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<comentario_por_tarea> comentario_por_tarea { get; set; }
         public virtual DbSet<comentarios_foro> comentarios_foro { get; set; }
         public virtual DbSet<estado> estado { get; set; }
         public virtual DbSet<foro> foro { get; set; }
@@ -41,6 +40,7 @@ namespace PrograAvanzada.Models
         public virtual DbSet<tarea> tarea { get; set; }
         public virtual DbSet<usuarios_por_proyecto> usuarios_por_proyecto { get; set; }
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
+        public virtual DbSet<comentario_por_tarea> comentario_por_tarea { get; set; }
     
         public virtual int sp_asignar_rol(string userId, string roleId)
         {

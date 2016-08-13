@@ -14,6 +14,7 @@ namespace PrograAvanzada.Controllers
     {
         private db_admin_proyectosEntities1 db = new db_admin_proyectosEntities1();
 
+        //Index creados para mostrar informacion dependiendo a quien se le quiere mostrar usando linq
         // GET: historico_tarea
         public ActionResult Index()
         {

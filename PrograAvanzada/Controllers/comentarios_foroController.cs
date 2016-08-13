@@ -14,6 +14,7 @@ namespace PrograAvanzada.Controllers
     {
         private db_admin_proyectosEntities1 db = new db_admin_proyectosEntities1();
 
+        //Se craen 3 index para mostrar partial views con sus respectivos datos, usando linq
         // GET: comentarios_foro
         public ActionResult Index2(int codForo)
         {
@@ -22,8 +23,7 @@ namespace PrograAvanzada.Controllers
             where datos.cod_foro == codForo
             select datos;
 
-            return PartialView(comentarios_foro.ToList());
-                       
+            return PartialView(comentarios_foro.ToList());                  
         }
 
         public ActionResult Index()
@@ -34,7 +34,6 @@ namespace PrograAvanzada.Controllers
             return PartialView(comentarios_foro.ToList());
 
         }
-
 
         public ActionResult FullIndex()
         {

@@ -6,22 +6,19 @@
 
 <h2>Comentarios</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.comentario)
+            @Html.DisplayName("Numero de Foro")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.fecha_comentario)
+            @Html.DisplayName("Fecha")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+            @Html.DisplayName("Comentado por")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.foro.id_foro)
+            @Html.DisplayName("Comentario")
         </th>
         <th></th>
     </tr>
@@ -29,7 +26,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.comentario)
+            @Html.DisplayFor(modelItem => item.foro.id_foro)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.fecha_comentario)
@@ -38,7 +35,7 @@
             @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.foro.id_foro)
+            @Html.DisplayFor(modelItem => item.comentario)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id_comentario_foro }) |

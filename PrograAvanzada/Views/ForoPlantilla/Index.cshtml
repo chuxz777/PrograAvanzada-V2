@@ -27,7 +27,7 @@ $(function () {
 
 <div>
     <div id="myPartialViewContainerComentarios">
-        <h3>Comentarios</h3>
+        <h2>Comentarios</h2>
         @Html.Action("Index2", "comentarios_foro", new { codForo = ViewBag.IdValue })
     </div>
 </div>
@@ -37,7 +37,7 @@ $(function () {
 
 <div>
     <div id="myPartialViewContainerCreate">
-        <h3>Agregar Comentario</h3>
+        <h2>Agregar Comentario</h2>
         @Html.Action("Create", "comentarios_foro", null)
     </div>
 </div>

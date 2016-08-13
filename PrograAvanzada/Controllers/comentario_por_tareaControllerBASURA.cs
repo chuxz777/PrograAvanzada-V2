@@ -15,11 +15,10 @@ using System.Text;
 
 namespace PrograAvanzada.Controllers
 {
-    public class comentario_por_tareaController : Controller
+    public class comentario_por_tareaControllerBASURA : Controller
     {
         private db_admin_proyectosEntities1 db = new db_admin_proyectosEntities1();
 
-        //Index creados para mostrar informacion y mostrarla dependiendo de la vista que se visite, se usa linq
         // GET: comentario_por_tarea
         public ActionResult Index()
         {
@@ -31,15 +30,14 @@ namespace PrograAvanzada.Controllers
         {
             var _comentario_por_tarea = from aux in db.comentario_por_tarea
                                         where aux.tarea.id_tarea == idtareapar
-                                        select aux;
+                                        select aux ;
             return View(_comentario_por_tarea.ToList());
         }
 
-        //metodo para descargar archivo xml del historial de comentarios de tareas
         public ActionResult DownLoadFile(int id)
         {
             var _comentario_por_tarea = from aux in db.comentario_por_tarea
-                                            //where aux.tarea.id_tarea == id
+                                        //where aux.tarea.id_tarea == id
                                         select aux;
 
             var data = _comentario_por_tarea.ToList();

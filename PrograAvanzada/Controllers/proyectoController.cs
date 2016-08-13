@@ -14,6 +14,7 @@ namespace PrograAvanzada.Controllers
     {
         private db_admin_proyectosEntities1 db = new db_admin_proyectosEntities1();
 
+        //Index creados para mostrar informacion dependiendo a quien se le quiere mostrar usando linq
         // GET: proyecto
         public ActionResult Index()
         {
@@ -32,6 +33,7 @@ namespace PrograAvanzada.Controllers
             Response.Redirect(sitio);
         }
         
+        //metodo creado para redirigir a un sitio con cierto valor por link usando linq
         [HttpGet, ValidateInput(false)]
         public void Ver(int id)
         {
@@ -54,8 +56,6 @@ namespace PrograAvanzada.Controllers
             string sitio = "~/foro/Index" + "?" + "proyecto=" + id;
             Response.Redirect(sitio);
         }
-
-
 
         // GET: proyecto/Details/5
         public ActionResult Details(int? id)

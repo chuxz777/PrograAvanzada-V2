@@ -14,33 +14,26 @@ namespace PrograAvanzada.Controllers
     {
         private db_admin_proyectosEntities1 db = new db_admin_proyectosEntities1();
 
+        //Se crean varios index para mostrar informacion dependiendo de quien la pida, se usa linq.
         // GET: foro
         public ActionResult Index2(int proyecto)
         {
-
             var foro =
             from datos in db.foro.Include(f => f.proyecto)
             where datos.cod_proyecto == proyecto
             select datos;
 
-            return PartialView(foro.ToList());
-            
+            return PartialView(foro.ToList());            
         }
 
         public ActionResult Index()
         {
-
             var foro =
             from datos in db.foro.Include(f => f.proyecto)
             select datos;
 
             return PartialView(foro.ToList());
-
         }
-
-
-
-
 
         // GET: foro/Details/5
         public ActionResult Details(int? id)
