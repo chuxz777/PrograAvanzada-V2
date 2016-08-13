@@ -1,5 +1,11 @@
 ﻿@model IEnumerable<PrograAvanzada.Models.comentarios_foro>
 
+@{
+    ViewBag.Title = "FullIndex";
+}
+
+<h2>Comentarios</h2>
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -43,8 +49,3 @@
 }
 
 </table>
-
-
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)

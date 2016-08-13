@@ -31,8 +31,17 @@ namespace PrograAvanzada.Controllers
             var comentarios_foro =
             from datos in db.comentarios_foro
             select datos;
-
             return PartialView(comentarios_foro.ToList());
+
+        }
+
+
+        public ActionResult FullIndex()
+        {
+            var comentarios_foro =
+            from datos in db.comentarios_foro
+            select datos;
+            return View(comentarios_foro.ToList());
 
         }
 
@@ -76,8 +85,8 @@ namespace PrograAvanzada.Controllers
 
             ViewBag.cod_usuario = new SelectList(db.AspNetUsers, "Id", "Email", comentarios_foro.cod_usuario);
             ViewBag.cod_foro = new SelectList(db.foro, "id_foro", "id_foro", comentarios_foro.cod_foro);
-            return View(comentarios_foro);
-            
+
+            return new EmptyResult();
         }
 
         // GET: comentarios_foro/Edit/5

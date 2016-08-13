@@ -1,14 +1,11 @@
-﻿
-@{
-    ViewBag.Title = "Index2";
+﻿@{
+    ViewBag.Title = "Index";
+    ViewBag.numero = "1";
+
 }
-
-<h2>Index2</h2>
-
 
 <script type="text/javascript" src="~/Scripts/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
-
 $(function () {
     $('#f5').click(function () {
         $("#myPartialViewContainerComentarios").load('http://localhost:2005/comentarios_foro/FullIndex')
@@ -27,7 +24,7 @@ $(function () {
 
 
 <h2>Nombre del Foro</h2>
-@Html.Action("Index", "foro")
+@Html.Action("Index","foro")
 
 <div>
     <div id="myPartialViewContainerComentarios">
@@ -36,13 +33,13 @@ $(function () {
     </div>
 </div>
 
-<button id="f5" class="btn btn-primary">Actualizar Comentarios</button>
-<button id="nuevo" class="btn btn-warning">Otro Comentario</button>
+<button id="f5" class="btn-primary">Actualizar Comentarios</button>
+<button id="nuevo" class="btn-warning">Otro Comentario</button>
 
 <div>
     <div id="myPartialViewContainerCreate">
         <h2>Agregar Comentario</h2>
-        @Html.Action("Create", "comentarios_foro", null)
+            @Html.Action("Create", "comentarios_foro", null)
     </div>
 </div>
 
