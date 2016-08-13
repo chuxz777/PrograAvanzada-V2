@@ -52,7 +52,7 @@
                 <td>
                     @Html.ActionLink("Editar", "Edit", new { id = item.id_proyecto }) |
                     @Html.ActionLink("Ver tareas", "Ver", new { id = item.id_proyecto })|
-                    @Html.ActionLink("Ir a Foro", "Index", "ForoPlantilla", new { @*id = item.id_proyecto*@ }, null)
+                    @Html.ActionLink("Ir a Foro", "RedirigirForo", new { id = item.id_proyecto })
 
         </td>
         </tr>

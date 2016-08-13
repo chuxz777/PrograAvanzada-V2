@@ -377,7 +377,6 @@
     <Content Include="Views\foro\Edit.cshtml" />
     <Content Include="Views\foro\Index.cshtml" />
     <Content Include="Views\comentarios_foro\Index.cshtml" />
-    <Content Include="Views\ForoPlantilla\Index-aux.cshtml" />
     <Content Include="Views\foro\Index2.cshtml" />
     <Content Include="Views\comentarios_foro\Index2.cshtml" />
     <Content Include="Views\comentarios_foro\Create.cshtml" />

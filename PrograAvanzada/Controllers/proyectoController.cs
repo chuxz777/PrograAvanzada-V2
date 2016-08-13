@@ -21,6 +21,12 @@ namespace PrograAvanzada.Controllers
             return View(proyecto.ToList());
         }
 
+        public void RedirigirForo(int? id)
+        {
+            string sitio = "http://localhost:2005/ForoPlantilla/Index" + "?" + "id=" + id;
+            Response.Redirect(sitio);
+        }
+        
         [HttpGet, ValidateInput(false)]
         public void Ver(int id)
         {
@@ -34,7 +40,7 @@ namespace PrograAvanzada.Controllers
 
             string a = _proyecto.FirstOrDefault();
             string sitio = "~/tareas/IndexPorProyecto" + "?" + "proyecto=" + a;
-             Response.Redirect(sitio);
+            Response.Redirect(sitio);
         }
 
         [HttpGet, ValidateInput(false)]

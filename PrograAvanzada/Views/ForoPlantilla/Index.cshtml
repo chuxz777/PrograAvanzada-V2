@@ -1,9 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "Index2";
+    ViewBag.Title = "Foro";
 }
 
-<h2>Index2</h2>
+<h2>Foro de Proyectos...</h2>
 
 
 <script type="text/javascript" src="~/Scripts/jquery-3.1.0.min.js"></script>
@@ -25,14 +25,10 @@ $(function () {
 });
 </script>
 
-
-<h2>Nombre del Foro</h2>
-@Html.Action("Index", "foro")
-
 <div>
     <div id="myPartialViewContainerComentarios">
-        <h2>Comentarios</h2>
-        @Html.Action("Index", "comentarios_foro", new { codForo = 1 })
+        <h3>Comentarios</h3>
+        @Html.Action("Index2", "comentarios_foro", new { codForo = ViewBag.IdValue })
     </div>
 </div>
 
@@ -41,7 +37,7 @@ $(function () {
 
 <div>
     <div id="myPartialViewContainerCreate">
-        <h2>Agregar Comentario</h2>
+        <h3>Agregar Comentario</h3>
         @Html.Action("Create", "comentarios_foro", null)
     </div>
 </div>

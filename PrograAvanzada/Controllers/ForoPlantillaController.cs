@@ -9,9 +9,9 @@ namespace PrograAvanzada.Controllers
     public class ForoPlantillaController : Controller
     {
         // GET: ForoPlantilla
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-
+            ViewBag.IdValue = id;
 
             return View();
         }

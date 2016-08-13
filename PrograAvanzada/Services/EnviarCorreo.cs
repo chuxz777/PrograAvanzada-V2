@@ -31,7 +31,7 @@ namespace PrograAvanzada.Services
             mail.Body = htmlBody;
             SmtpServer.Port = 587;
             SmtpServer.UseDefaultCredentials = false;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("jesus.rojas.umana@outlook.com", "(jesus777)");
+            SmtpServer.Credentials = new System.Net.NetworkCredential("jesus.rojas.umana@outlook.com", "Secure#1234");
             SmtpServer.EnableSsl = true;
 
             try
