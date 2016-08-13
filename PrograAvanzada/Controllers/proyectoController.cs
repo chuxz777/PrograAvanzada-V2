@@ -20,6 +20,11 @@ namespace PrograAvanzada.Controllers
             var proyecto = db.proyecto.Include(p => p.AspNetUsers).Include(p => p.estado);
             return View(proyecto.ToList());
         }
+        public ActionResult Index3()
+        {
+            var proyecto = db.proyecto.Include(p => p.AspNetUsers).Include(p => p.estado);
+            return View(proyecto.ToList());
+        }
 
         public void RedirigirForo(int? id)
         {

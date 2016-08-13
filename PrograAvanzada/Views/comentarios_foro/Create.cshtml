@@ -1,53 +1,62 @@
 ﻿@model PrograAvanzada.Models.comentarios_foro
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.comentario,"Comentario: ", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.comentario, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.comentario, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.fecha_comentario, "Fecha: ", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.fecha_comentario, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.fecha_comentario, "", new { @class = "text-danger" })
+        <div class="panel panel-primary class">
+            <div class="panel-heading">
+                <h4>Mi Comentario</h4>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.cod_foro, "Cod. Foro: ", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("cod_foro", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.cod_foro, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            <div class="panel-body">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.cod_usuario, "Usuario: ", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("cod_usuario", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.cod_usuario, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.comentario,"Comentario: ", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.comentario, new { htmlAttributes = new { @class = "form-control input-lg" } })
+                            @Html.ValidationMessageFor(model => model.comentario, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Agregar Comentario" class="btn btn-default" />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.fecha_comentario,"Fecha: ", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-xs-12 col-sm-6 col-md-8">
+                            @Html.EditorFor(model => model.fecha_comentario, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.fecha_comentario, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.cod_foro, "Codigo Foro: ", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("cod_foro", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.cod_foro, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.cod_usuario, "Usuario: ", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("cod_usuario", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.cod_usuario, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="panel-footer">
+                <div class="form-group">
+                    <input type="submit" value="Enviar Comentario" class="btn btn-success" />
+                </div>
             </div>
         </div>
-    </div>
 }
-
 <div>
     @*@Html.ActionLink("Back to List", "Index")*@
 </div>

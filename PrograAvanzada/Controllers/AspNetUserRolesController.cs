@@ -21,6 +21,13 @@ namespace PrograAvanzada.Controllers
             return View(aspNetUserRoles.ToList());
         }
 
+        public ActionResult Index2()
+        {
+            var aspNetUserRoles = db.AspNetUserRoles.Include(a => a.AspNetRoles).Include(a => a.AspNetUsers);
+            return View(aspNetUserRoles.ToList());
+        }
+
+
         // GET: AspNetUserRoles/Details/5
         public ActionResult Details(int? id)
         {

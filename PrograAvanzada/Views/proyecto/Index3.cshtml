@@ -1,0 +1,56 @@
+﻿@model IEnumerable<PrograAvanzada.Models.proyecto>
+
+@{
+    ViewBag.Title = "Proyectos";
+}
+
+<ul class="nav nav-tabs span2 clearfix">
+
+    <br> </br>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h2>Proyectos</h2>
+        </div>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Nombre del proyecto")
+            </th>
+            <th>
+                @Html.DisplayName("Descripcion")
+            </th>
+            <th>
+                @Html.DisplayName("Correo electronico")
+            </th>
+            <th>
+                @Html.DisplayName("Estado")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre_proyecto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estado.descripcion)
+                </td>
+                <td>
+
+
+        </td>
+        </tr>
+        }
+
+        </table>

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<PrograAvanzada.Models.AspNetUserRoles>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br> </br>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h2>Usuarios</h2>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Nombre usuario")
+        </th>
+        <th>
+            @Html.DisplayName("Correo electronico")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetRoles.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+        </td>
+    </tr>
+}
+</table>

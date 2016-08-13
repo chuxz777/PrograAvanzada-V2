@@ -382,6 +382,8 @@
     <Content Include="Views\comentarios_foro\Create.cshtml" />
     <Content Include="Views\comentarios_foro\FullIndex.cshtml" />
     <Content Include="Views\ForoPlantilla\Index.cshtml" />
+    <Content Include="Views\proyecto\Index3.cshtml" />
+    <Content Include="Views\AspNetUserRoles\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

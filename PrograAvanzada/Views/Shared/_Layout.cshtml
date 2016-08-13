@@ -26,20 +26,21 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     
-                    @*@if (!(User.IsInRole("Analistas") || User.IsInRole("Desarrolladores")))
-                    {*@
+                    @if (User.IsInRole("Administrador de Proyectos") || User.IsInRole("Miembro del Equipo") || User.IsInRole("Jefaturas"))
+                    {
                         <li>@Html.ActionLink(" Proyectos", "Index", "proyecto", null, new { @class = "active glyphicon glyphicon-folder-open" })</li>
-                    @*}*@
+                    }
 
-                    @*@if (User.IsInRole("Administrador de Proyectos"))
-                    {*@
+                    @if (User.IsInRole("Administrador de Proyectos"))
+                    {
                         <li>@Html.ActionLink(" Usuarios", "Index", "AspNetUserRoles", null, new { @class = "active glyphicon glyphicon-user" })</li>
-                    @*}*@
-
+                    }
+                    @if (User.IsInRole("Administrador de Proyectos") || User.IsInRole("Miembro del Equipo") || User.IsInRole("Jefaturas") || User.IsInRole("Analista") || User.IsInRole("Desarrollador"))
+                    { 
                     <li>@Html.ActionLink(" Tareas", "Index", "Tareas", null, new { @class = "active glyphicon glyphicon-th-list" })</li>
                     <li>@Html.ActionLink(" Comentarios de Tareas", "Index", "comentario_por_tarea", null, new { @class = "active glyphicon glyphicon-comment" })</li>
                     <li>@Html.ActionLink(" Historico Tarea", "Index", "historico_tarea", null, new { @class = "active glyphicon glyphicon-calendar" })</li>
-                   
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
